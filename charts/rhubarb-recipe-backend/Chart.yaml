@@ -1,0 +1,7 @@
+name: rhubarb-recipe-backend
+home: https://github.com/hmcts/cnp-rhubarb-recipes-service
+version: 0.0.1
+description: HMCTS Rhubarb recipes service (test application)
+maintainers:
+  - name: HMCTS CNP Team
+    email: cnpteam@hmcts.net

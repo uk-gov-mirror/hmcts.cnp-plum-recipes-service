@@ -1,0 +1,16 @@
+#!groovy
+
+properties([
+  // H allows predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
+  pipelineTriggers([cron('H 05 * * *')])
+])
+
+@Library("Infrastructure")
+
+def type = "java"
+def product = "rhubarb"
+def component = "recipe-backend"
+
+withNightlyPipeline(type, product, component) {
+  enableSlackNotifications('#rpe-build-notices')
+}

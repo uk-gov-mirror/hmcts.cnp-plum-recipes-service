@@ -1,0 +1,17 @@
+---
+version: '2.2'
+
+services:
+  rhubarb-recipes-service:
+    build:
+      context: .
+    cpus: 2.5
+    mem_limit: 1024M
+    environment:
+      POSTGRES_HOST:
+      POSTGRES_DATABASE:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+      JAVA_OPTS:
+    ports:
+      - 9080:4550

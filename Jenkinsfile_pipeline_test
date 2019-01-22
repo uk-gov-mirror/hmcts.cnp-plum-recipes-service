@@ -1,0 +1,48 @@
+#!groovy
+
+// ______        _   _       _     _____
+// |  _  \      | \ | |     | |   /  __ \
+// | | | |___   |  \| | ___ | |_  | /  \/ ___  _ __  _   _
+// | | | / _ \  | . ` |/ _ \| __| | |    / _ \| '_ \| | | |
+// | |/ / (_) | | |\  | (_) | |_  | \__/\ (_) | |_) | |_| |
+// |___/ \___/  \_| \_/\___/ \__|  \____/\___/| .__/ \__, |
+//                                            | |     __/ |
+//                                            |_|    |___/
+//
+// THIS PIPELINE IS FOR TESTING SHARED PIPELINE CODE ONLY
+
+properties([
+  parameters([
+    string(name: 'LIB_VERSION', defaultValue: 'master', description: 'Branch name of pipeline library to use')
+  ])
+])
+
+library "Infrastructure@${params.LIB_VERSION}"
+
+def type = "java"
+def product = "custard"
+def app = "recipe-backend"
+
+List<LinkedHashMap<String, Object>> secrets = [
+  secret('recipe-backend-POSTGRES-HOST', 'POSTGRES_HOST'),
+  secret('recipe-backend-POSTGRES-DATABASE', 'POSTGRES_DATABASE'),
+  secret('recipe-backend-POSTGRES-USER', 'POSTGRES_USER'),
+  secret('recipe-backend-POSTGRES-PASS', 'POSTGRES_PASSWORD')
+]
+
+static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
+  [ $class: 'AzureKeyVaultSecret',
+    secretType: 'Secret',
+    name: secretName,
+    version: '',
+    envVariable: envVar
+  ]
+}
+
+withPipeline(type, product, app) {
+  enablePerformanceTest()
+  enableDockerBuild()
+  enableDeployToAKS()
+  loadVaultSecrets(secrets)
+  setVaultName(product)
+}
