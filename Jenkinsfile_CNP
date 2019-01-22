@@ -3,7 +3,7 @@
 @Library("Infrastructure")
 
 def type = "java"
-def product = "rhubarb"
+def product = "plum"
 def component = "recipe-backend"
 
 def apiTestSecrets = [ 'rhubarb-${env}' :
