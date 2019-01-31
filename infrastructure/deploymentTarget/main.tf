@@ -6,8 +6,6 @@ provider "azurerm" {
 }
 
 locals {
-  //create_api = "${var.env != "preview" && var.env != "spreview"}"
-
   # list of the thumbprints of the SSL certificates that should be accepted by the API (gateway)
   allowed_certificate_thumbprints = [
     # API tests
@@ -16,7 +14,7 @@ locals {
   thumbprints_in_quotes = "${formatlist("&quot;%s&quot;", local.allowed_certificate_thumbprints)}"
   thumbprints_in_quotes_str = "${join(",", local.thumbprints_in_quotes)}"
   api_policy = "${replace(file("template/api-policy.xml"), "ALLOWED_CERTIFICATE_THUMBPRINTS", local.thumbprints_in_quotes_str)}"
-  api_base_path = "rhubarb-recipes-api"
+  //api_base_path = "rhubarb-recipes-api"
   app = "recipe-backend"
 
   shared_infra_rg = "${var.product}-shared-infrastructure-${var.env}"
@@ -25,11 +23,11 @@ locals {
 }
 
 module "recipe-backend" {
-  //source       = "git@github.com:hmcts/cnp-module-webapp?ref=deployment-target"
-  source       = "git@github.com:hmcts/cnp-module-webapp?ref=cnp-1094-dt"
+  source       = "git@github.com:hmcts/cnp-module-webapp?ref=master"
   product      = "${var.product}-${local.app}"
   location     = "${var.location}"
-  env          = "${var.env}${var.deployment_target}"
+  env          = "${var.env}"
+  deployment_target = "${var.deployment_target}"
   ilbIp        = "${var.ilbIp}"
   subscription = "${var.subscription}"
   is_frontend  = false
@@ -38,15 +36,13 @@ module "recipe-backend" {
   asp_name     = "${var.product}-${var.env}${var.deployment_target}"
   asp_rg       = "${local.shared_infra_rg}${var.deployment_target}"
   instance_size = "I1"
-  //deployment_target = "${var.deployment_target}"
-  //resource_group_name = "${var.product}-${var.env}${var.deployment_target}"
-
+  
   appinsights_instrumentation_key = "${data.azurerm_key_vault_secret.appInsights-InstrumentationKey.value}"
 
   app_settings                         = {
     POSTGRES_HOST                      = "${data.azurerm_key_vault_secret.POSTGRES_HOST.value}"
     POSTGRES_PORT                      = "${data.azurerm_key_vault_secret.POSTGRES_PORT.value}"
-    POSTGRES_DATABASE                  = "${data.azurerm_key_vault_secret.POSTGRES_DATABASE.value}}"
+    POSTGRES_DATABASE                  = "${data.azurerm_key_vault_secret.POSTGRES_DATABASE.value}"
     POSTGRES_USER                      = "${data.azurerm_key_vault_secret.POSTGRES-USER.value}"
     POSTGRES_PASSWORD                  = "${data.azurerm_key_vault_secret.POSTGRES-PASS.value}"
     WEBSITE_PROACTIVE_asp_name_ENABLED = "${var.autoheal}"

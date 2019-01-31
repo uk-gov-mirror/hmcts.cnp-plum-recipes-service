@@ -16,6 +16,8 @@ locals {
   thumbprints_in_quotes_str = "${join(",", local.thumbprints_in_quotes)}"
   api_policy = "${replace(file("template/api-policy.xml"), "ALLOWED_CERTIFICATE_THUMBPRINTS", local.thumbprints_in_quotes_str)}"
   api_base_path = "rhubarb-recipes-api"
+  shared_infra_rg = "${var.product}-shared-infrastructure-${var.env}"
+  vault_name = "${var.product}si-${var.env}"
 }
 
 module "recipe-backend" {
@@ -39,45 +41,51 @@ module "recipe-backend" {
   }
 }
 
-module "key-vault" {
-  source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-  product                 = "${var.product}"
-  env                     = "${var.env}"
-  tenant_id               = "${var.tenant_id}"
-  object_id               = "${var.jenkins_AAD_objectId}"
-  resource_group_name     = "${module.recipe-backend.resource_group_name}"
-  # dcd_cc-dev group object ID
-  product_group_object_id = "38f9dea6-e861-4a50-9e73-21e64f563537"
+# module "key-vault" {
+#   source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
+#   product                 = "${var.product}"
+#   env                     = "${var.env}"
+#   tenant_id               = "${var.tenant_id}"
+#   object_id               = "${var.jenkins_AAD_objectId}"
+#   resource_group_name     = "${module.recipe-backend.resource_group_name}"
+#   # dcd_cc-dev group object ID
+#   product_group_object_id = "38f9dea6-e861-4a50-9e73-21e64f563537"
+# }
+
+data "azurerm_key_vault" "key_vault" {
+  name                = "${local.vault_name}"
+  resource_group_name = "${local.shared_infra_rg}"
 }
+
 
 resource "azurerm_key_vault_secret" "POSTGRES-USER" {
   name      = "recipe-backend-POSTGRES-USER"
   value     = "${module.recipe-database.user_name}"
-  vault_uri = "${module.key-vault.key_vault_uri}"
+  vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
   name      = "recipe-backend-POSTGRES-PASS"
   value     = "${module.recipe-database.postgresql_password}"
-  vault_uri = "${module.key-vault.key_vault_uri}"
+  vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_HOST" {
   name      = "recipe-backend-POSTGRES-HOST"
   value     = "${module.recipe-database.host_name}"
-  vault_uri = "${module.key-vault.key_vault_uri}"
+  vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_PORT" {
   name      = "recipe-backend-POSTGRES-PORT"
   value     = "${module.recipe-database.postgresql_listen_port}"
-  vault_uri = "${module.key-vault.key_vault_uri}"
+  vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
   name      = "recipe-backend-POSTGRES-DATABASE"
   value     = "${module.recipe-database.postgresql_database}"
-  vault_uri = "${module.key-vault.key_vault_uri}"
+  vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
 }
 
 module "recipe-database" {
