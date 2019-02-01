@@ -8,6 +8,6 @@ output "api_gateway_url" {
   value = "https://core-api-mgmt-${var.env}.azure-api.net/${local.api_base_path}"
 }
 
-# output "vaultName" {
-#   value = "${data.azurerm_key_vault.key_vault.vaultName}"
-# }
+output "vaultName" {
+  value = "${local.vault_name}"
+}
