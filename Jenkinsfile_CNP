@@ -7,7 +7,7 @@ def type = "java"
 def product = "plum"
 def component = "recipe-backend"
 
-def apiTestSecrets = [ 'plum-${env}' :
+def apiTestSecrets = [ 'plumsi-${env}' :
   [
     secret('test-client-key-store', 'TEST_CLIENT_KEY_STORE'),
     secret('test-client-key-store-password', 'TEST_CLIENT_KEY_STORE_PASSWORD'),
