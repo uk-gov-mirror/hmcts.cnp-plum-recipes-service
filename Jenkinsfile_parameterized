@@ -1,6 +1,6 @@
 #!groovy
 //@Library(value="Infrastructure", changelog=false)
-@Library('Infrastructure@deployment-target-spike') _
+@Library('Infrastructure@deployment-target') _
 
 List<LinkedHashMap<String, Object>> apiTestSecrets = [
   secret('test-client-key-store', 'TEST_CLIENT_KEY_STORE'),
