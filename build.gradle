@@ -78,8 +78,12 @@ dependencies {
 
 mainClassName = 'uk.gov.hmcts.reform.rhubarb.Application'
 
-jar {
-  archiveName 'moj-rhubarb-recipes-service.jar'
+bootJar {
+  archiveName = 'moj-rhubarb-recipes-service.jar'
+
+  manifest {
+    attributes('Implementation-Version': project.version.toString())
+  }
 }
 
 sourceSets {
