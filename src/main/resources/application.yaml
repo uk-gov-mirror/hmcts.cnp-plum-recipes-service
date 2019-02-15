@@ -2,17 +2,13 @@ server:
   # TODO: change to your application's port number
   port: 4550
 
-management:
-  security:
-    enabled: false
-
 spring:
   application:
     name: HMCTS Rhubarb Recipes Service
   cloud:
     kubernetes:
       secrets:
-        paths: /kvmnt/kvcreds-plumsi
+        paths: /kvmnt/kvcreds-plumsi/recipe-backend-POSTGRES-USER,/kvmnt/kvcreds-plumsi/recipe-backend-POSTGRES-PASS
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DATABASE}?sslmode=${POSTGRES_SSL_MODE:require}
     #username: ${POSTGRES_USER}
