@@ -25,6 +25,28 @@
     <notes><![CDATA[ slf4j only has a beta version released with the 'fix', looks like lots of changes in it... ]]></notes>
     <cve>CVE-2018-8088</cve>
   </suppress>
+
+  <suppress>
+    <notes><![CDATA[ spring-cloud-starter-kubernetes-config-1.0.0.RELEASE.jar ]]></notes>
+    <cve>CVE-2015-7528</cve>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[ spring-cloud-starter-kubernetes-config-1.0.0.RELEASE.jar ]]></notes>
+    <cve>CVE-2016-1905</cve>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[ spring-cloud-starter-kubernetes-config-1.0.0.RELEASE.jar ]]></notes>
+    <cve>CVE-2016-1906</cve>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[ spring-cloud-starter-kubernetes-config-1.0.0.RELEASE.jar ]]></notes>
+    <cve>CVE-2016-7075</cve>
+  </suppress>
+  <suppress>
+    <notes><![CDATA[ spring-cloud-starter-kubernetes-config-1.0.0.RELEASE.jar ]]></notes>
+    <cve>CVE-2018-1002105</cve>
+  </suppress>
+
   <suppress>
     <notes><![CDATA[
     need to be on spring boot 2.x for the fix, suppressing as this is a test project
