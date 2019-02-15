@@ -1,7 +1,7 @@
 java:
   applicationPort: 4550
   environment:
-    POSTGRES_HOST: ${SERVICE_NAME}-postgres  # do not modify
+    POSTGRES_HOST: ${SERVICE_NAME}-postgresql
     POSTGRES_SSL_MODE: disable
     POSTGRES_DATABASE: plum
     POSTGRES_USER: hmcts
