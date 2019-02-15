@@ -76,7 +76,7 @@ dependencies {
   testCompile group: 'com.typesafe', name: 'config', version: '1.3.2'
 }
 
-mainClassName = 'uk.gov.hmcts.reform.rhubarb.Application'
+mainClassName = 'uk.gov.hmcts.reform.rhubarb.recipes.Application'
 
 bootJar {
   archiveName = 'moj-rhubarb-recipes-service.jar'
