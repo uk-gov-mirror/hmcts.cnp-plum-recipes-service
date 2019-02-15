@@ -9,10 +9,16 @@ management:
 spring:
   application:
     name: HMCTS Rhubarb Recipes Service
+  cloud:
+    kubernetes:
+      secrets:
+        paths: /kvmnt/kvcreds-plumsi
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DATABASE}?sslmode=${POSTGRES_SSL_MODE:require}
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD:}
+    #username: ${POSTGRES_USER}
+    #password: ${POSTGRES_PASSWORD:}
+    username: ${recipe-backend-POSTGRES-USER}
+    password: ${recipe-backend-POSTGRES-USER}
     properties:
       charSet: UTF-8
     maxWaitForConnection: 2000
@@ -27,4 +33,3 @@ spring:
     abandonWhenPercentageFull: 0
     testOnBorrow: true
     validationQuery: SELECT 1
-
