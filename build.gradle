@@ -68,7 +68,6 @@ dependencies {
   compile group: 'uk.gov.hmcts.reform', name: 'http-proxy-spring-boot-autoconfigure', version: '1.1.0'
   compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix', version: springHystrixVersion
   compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix-dashboard', version: springHystrixVersion
-  compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-kubernetes-config', version: '1.0.0.RELEASE'
   compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
 
   testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
