@@ -9,12 +9,6 @@ java:
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
-  keyVaults:
-    "plumsi":
-      resourceGroup: plum-shared-infrastructure
-      secrets:
-        - recipe-backend-POSTGRES-USER
-        - recipe-backend-POSTGRES-PASS
 
 postgresql:
   postgresqlUsername: hmcts
