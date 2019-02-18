@@ -25,6 +25,16 @@
     <notes><![CDATA[ slf4j only has a beta version released with the 'fix', looks like lots of changes in it... ]]></notes>
     <cve>CVE-2018-8088</cve>
   </suppress>
+
+  <suppress>
+    <notes><![CDATA[No fix is available]]></notes>
+    <gav regex="true">^org\.springframework\.security:spring-security-rsa:1\.0\.7\.RELEASE$</gav>
+    <cve>CVE-2011-2731</cve>
+    <cve>CVE-2011-2732</cve>
+    <cve>CVE-2012-5055</cve>
+    <cve>CVE-2018-1260</cve>
+  </suppress>
+
   <suppress>
     <notes><![CDATA[
     need to be on spring boot 2.x for the fix, suppressing as this is a test project

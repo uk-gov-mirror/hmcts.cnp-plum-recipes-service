@@ -2,10 +2,6 @@ server:
   # TODO: change to your application's port number
   port: 4550
 
-management:
-  security:
-    enabled: false
-
 spring:
   application:
     name: HMCTS Rhubarb Recipes Service
@@ -28,3 +24,12 @@ spring:
     testOnBorrow: true
     validationQuery: SELECT 1
 
+management:
+  endpoint:
+    health:
+      show-details: "always"
+  endpoints:
+    web:
+      base-path: "/"
+  security:
+    enabled: false
