@@ -27,15 +27,6 @@
   </suppress>
 
   <suppress>
-    <notes><![CDATA[ spring-cloud-starter-kubernetes-config-1.0.0.RELEASE.jar ]]></notes>
-    <cve>CVE-2015-7528</cve>
-    <cve>CVE-2016-1905</cve>
-    <cve>CVE-2016-1906</cve>
-    <cve>CVE-2016-7075</cve>
-    <cve>CVE-2018-1002105</cve>
-  </suppress>
-
-  <suppress>
     <notes><![CDATA[No fix is available]]></notes>
     <gav regex="true">^org\.springframework\.security:spring-security-rsa:1\.0\.7\.RELEASE$</gav>
     <cve>CVE-2011-2731</cve>
