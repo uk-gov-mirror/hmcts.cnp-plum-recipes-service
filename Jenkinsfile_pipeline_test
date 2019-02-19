@@ -20,10 +20,10 @@ properties([
 library "Infrastructure@${params.LIB_VERSION}"
 
 def type = "java"
-def product = "custard"
+def product = "crumble"
 def app = "recipe-backend"
 
-def apiTestSecrets = [ 'custardsi-${env}' :
+def apiTestSecrets = [ 'crumblesi-${env}' :
   [
     secret('test-client-key-store', 'TEST_CLIENT_KEY_STORE'),
     secret('test-client-key-store-password', 'TEST_CLIENT_KEY_STORE_PASSWORD'),
