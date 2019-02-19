@@ -23,11 +23,12 @@ def type = "java"
 def product = "custard"
 def app = "recipe-backend"
 
-List<LinkedHashMap<String, Object>> secrets = [
-  secret('recipe-backend-POSTGRES-HOST', 'POSTGRES_HOST'),
-  secret('recipe-backend-POSTGRES-DATABASE', 'POSTGRES_DATABASE'),
-  secret('recipe-backend-POSTGRES-USER', 'POSTGRES_USER'),
-  secret('recipe-backend-POSTGRES-PASS', 'POSTGRES_PASSWORD')
+def apiTestSecrets = [ 'custardsi-${env}' :
+  [
+    secret('test-client-key-store', 'TEST_CLIENT_KEY_STORE'),
+    secret('test-client-key-store-password', 'TEST_CLIENT_KEY_STORE_PASSWORD'),
+    secret('test-client-subscription-key', 'TEST_CLIENT_SUBSCRIPTION_KEY')
+  ]
 ]
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
@@ -43,6 +44,8 @@ withPipeline(type, product, app) {
   enablePerformanceTest()
   enableDockerBuild()
   enableDeployToAKS()
-  loadVaultSecrets(secrets)
   setVaultName(product)
+  onNonPR() {
+    loadVaultSecrets(apiTestSecrets)
+  }
 }
