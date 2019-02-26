@@ -136,7 +136,7 @@ task apiGateway(type: Test, description: 'Runs the smoke tests for API gateway.'
 
 sonarqube {
   properties {
-    property "sonar.projectName", "moj-rhubarb-recipes-service"
-    property "sonar.projectKey", "moj-rhubarb-recipes-service"
+    property "sonar.projectName", "cnp-plum-recipes-service"
+    property "sonar.projectKey", "cnp-plum-recipes-service"
   }
 }
