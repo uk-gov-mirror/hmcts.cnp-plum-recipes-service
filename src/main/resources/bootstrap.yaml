@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    propertiesvolume:
+      enabled: true
+      prefixed: true
+      paths: /mnt/secrets/plumsi-aat
+      aliases:
+        plumsi-aat.recipe-backend-POSTGRES-DATABASE: POSTGRES_DATABASE
+        plumsi-aat.recipe-backend-POSTGRES-HOST: POSTGRES_HOST
+        plumsi-aat.recipe-backend-POSTGRES-USER: POSTGRES_USER
+        plumsi-aat.recipe-backend-POSTGRES-PASS: POSTGRES_PASSWORD

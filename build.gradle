@@ -64,7 +64,8 @@ dependencies {
   compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
   compile group: 'org.flywaydb', name: 'flyway-core', version: '5.2.4'
   compile group: 'uk.gov.hmcts.reform', name: 'health-spring-boot-starter', version: '0.0.3'
-
+  compile group: 'uk.gov.hmcts.reform', name: 'properties-volume-spring-boot-starter', version: '0.0.4'
+  
   compile group: 'uk.gov.hmcts.reform', name: 'java-logging', version: javaLoggingVersion
   compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: javaLoggingVersion
   compile group: 'uk.gov.hmcts.reform', name: 'http-proxy-spring-boot-autoconfigure', version: '1.1.0'

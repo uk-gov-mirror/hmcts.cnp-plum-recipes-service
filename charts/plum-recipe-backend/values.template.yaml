@@ -10,6 +10,9 @@ java:
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
 
+tags:
+  postgresql-pod: true  # if true postgresql runs in a k8s pod (i.e. true for aat - false for preview)
+
 postgresql:
   postgresqlUsername: hmcts
   postgresqlPassword: hmcts
