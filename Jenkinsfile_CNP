@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure")
+@Library("Infrastructure@git-image-tag")
 
 def type = "java"
 def product = "plum"
