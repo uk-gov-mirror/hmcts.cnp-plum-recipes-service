@@ -1,15 +1,14 @@
 java:
   applicationPort: 4550
   environment:
-    POSTGRES_HOST: ${SERVICE_NAME}-postgresql
+    POSTGRES_HOST: "{{ .Release.Name }}-postgresql"
     POSTGRES_SSL_MODE: disable
     POSTGRES_DATABASE: plum
     POSTGRES_USER: hmcts
     POSTGRES_PASSWORD: hmcts
+  # Don't modify below here
+  image: 'https://hmcts.azurecr.io/hmcts/plum-recipe-backend:latest'
   postgresql:
     postgresqlUsername: hmcts
     postgresqlPassword: hmcts
     postgresqlDatabase: plum
-  # Don't modify below here
-  image: ${IMAGE_NAME}
-  ingressHost: ${SERVICE_FQDN}
