@@ -1,0 +1,14 @@
+java:
+  applicationPort: 4550
+  environment:
+    POSTGRES_HOST: "{{ .Release.Name }}-postgresql"
+    POSTGRES_SSL_MODE: disable
+    POSTGRES_DATABASE: crumble
+    POSTGRES_USER: hmcts
+    POSTGRES_PASSWORD: hmcts
+  # Don't modify below here
+  image: 'https://hmcts.azurecr.io/hmcts/crumble-recipe-backend:latest'
+  postgresql:
+    postgresqlUsername: hmcts
+    postgresqlPassword: hmcts
+    postgresqlDatabase: crumble
