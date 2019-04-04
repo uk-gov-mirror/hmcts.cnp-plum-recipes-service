@@ -43,7 +43,7 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 withPipeline(type, product, app) {
   enablePerformanceTest()
   enableDockerBuild()
-  enableDeployToAKS()
+  installCharts()
   onNonPR() {
     loadVaultSecrets(apiTestSecrets)
   }
