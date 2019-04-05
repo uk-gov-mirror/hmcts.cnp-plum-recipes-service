@@ -1,5 +1,6 @@
 package uk.gov.hmcts.reform.rhubarb.recipes;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,4 +14,8 @@ public class ApplicationTests {
     public void contextLoads() {
     }
 
+    @Test
+    public void failingTest() {
+        Assert.fail();
+    }
 }

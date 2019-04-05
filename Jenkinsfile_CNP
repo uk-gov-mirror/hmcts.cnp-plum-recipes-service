@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@no-skip-build")
+@Library("Infrastructure@img-untag-onfail")
 
 def type = "java"
 def product = "plum"
