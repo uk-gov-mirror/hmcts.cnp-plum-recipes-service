@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@img-untag-onfail")
+@Library("Infrastructure")
 
 def type = "java"
 def product = "plum"
@@ -24,6 +24,10 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 }
 
 withPipeline(type, product, component) {
+  if (env.SUBSCRIPTION_NAME == 'sandbox') {
+    env.NO_SKIP_IMG_BUILD = 'true'
+  }
+
   enableDockerBuild()
   installCharts()
   enablePerformanceTest()
