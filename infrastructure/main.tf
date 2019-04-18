@@ -21,17 +21,18 @@ locals {
 }
 
 module "recipe-backend" {
-  source       = "git@github.com:hmcts/cnp-module-webapp?ref=master"
-  product      = "${var.product}-${local.app}"
-  location     = "${var.location}"
-  env          = "${var.env}"
-  ilbIp        = "${var.ilbIp}"
-  subscription = "${var.subscription}"
-  is_frontend  = false
-  capacity     = "${var.capacity}"
-  common_tags  = "${var.common_tags}"
+  source                 = "git@github.com:hmcts/cnp-module-webapp?ref=master"
+  product                = "${var.product}-${local.app}"
+  location               = "${var.location}"
+  env                    = "${var.env}"
+  ilbIp                  = "${var.ilbIp}"
+  subscription           = "${var.subscription}"
+  is_frontend            = false
+  capacity               = "${var.capacity}"
+  common_tags            = "${var.common_tags}"
+  java_container_version = "9.0"
 
-  app_settings                         = {
+  app_settings = {
     POSTGRES_HOST                      = "${module.recipe-database.host_name}"
     POSTGRES_PORT                      = "${module.recipe-database.postgresql_listen_port}"
     POSTGRES_DATABASE                  = "${module.recipe-database.postgresql_database}"
@@ -56,7 +57,6 @@ data "azurerm_key_vault" "key_vault" {
   name                = "${local.vault_name}"
   resource_group_name = "${local.shared_infra_rg}"
 }
-
 
 resource "azurerm_key_vault_secret" "POSTGRES-USER" {
   name      = "recipe-backend-POSTGRES-USER"

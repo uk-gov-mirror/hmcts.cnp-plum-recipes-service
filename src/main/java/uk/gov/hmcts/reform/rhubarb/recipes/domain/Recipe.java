@@ -1,31 +1,17 @@
 package uk.gov.hmcts.reform.rhubarb.recipes.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
+@AllArgsConstructor
 public class Recipe {
 
-    public final String id;
-
+    private final String id;
     @JsonIgnore
-    public final String userId;
-
-    public final String name;
-
-    public final String ingredients;
-
-    public final String method;
-
-    public Recipe(
-        String id,
-        String userId,
-        String name,
-        String ingredients,
-        String method
-    ) {
-        this.id = id;
-        this.userId = userId;
-        this.name = name;
-        this.ingredients = ingredients;
-        this.method = method;
-    }
+    private final String userId;
+    private final String name;
+    private final String ingredients;
+    private final String method;
 }

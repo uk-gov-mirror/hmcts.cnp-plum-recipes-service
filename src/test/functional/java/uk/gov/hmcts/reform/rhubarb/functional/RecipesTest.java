@@ -1,10 +1,10 @@
 package uk.gov.hmcts.reform.rhubarb.functional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static io.restassured.RestAssured.get;
 
@@ -25,8 +25,7 @@ public class RecipesTest {
     }
 
     @Test
-    public void
-    recipes_list_returns_200() {
+    public void recipes_list_returns_200() {
         get("/recipes").then().statusCode(200);
     }
 }

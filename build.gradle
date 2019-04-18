@@ -19,20 +19,14 @@ pmd.toolVersion = '6.11.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-checkstyle.toolVersion = '8.2'
-checkstyle.configFile = new File(rootDir, "checkstyle.xml")
+checkstyle {
+  toolVersion = '8.2'
+  configFile = new File(rootDir, "checkstyle.xml")
+  maxWarnings = 0
+}
 
-// make build fail on Checkstyle issues (https://github.com/gradle/gradle/issues/881)
-tasks.withType(Checkstyle).each { checkstyleTask ->
-  checkstyleTask.doLast {
-    reports.all { report ->
-      def outputFile = report.destination
-      if (outputFile.exists() && outputFile.text.contains("<error ")) {
-        // checkstyle not important for this demo for now
-//        throw new GradleException("There were checkstyle warnings! For more info check $outputFile")
-      }
-    }
-  }
+ext {
+  lombokVersion = '1.18.6'
 }
 
 // https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/configuration.html
@@ -60,32 +54,45 @@ repositories {
   }
 }
 
+dependencyManagement {
+  dependencies {
+    // CVE-2019-0232 - command line injections on windows
+    dependencySet(group: 'org.apache.tomcat.embed', version: '9.0.19') {
+      entry 'tomcat-embed-core'
+      entry 'tomcat-embed-el'
+      entry 'tomcat-embed-websocket'
+    }
+  }
+}
+
 dependencies {
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: springBootVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: springBootVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: springBootVersion
-  compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+  compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
   compile group: 'org.flywaydb', name: 'flyway-core', version: '5.2.4'
   compile group: 'uk.gov.hmcts.reform', name: 'health-spring-boot-starter', version: '0.0.3'
   compile group: 'uk.gov.hmcts.reform', name: 'properties-volume-spring-boot-starter', version: '0.0.4'
   
   compile group: 'uk.gov.hmcts.reform', name: 'java-logging', version: javaLoggingVersion
   compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: javaLoggingVersion
-  compile group: 'uk.gov.hmcts.reform', name: 'http-proxy-spring-boot-autoconfigure', version: '1.1.0'
   compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix', version: springHystrixVersion
   compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix-dashboard', version: springHystrixVersion
   compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
 
+  compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+  annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+
   testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
-  testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.6'
+  testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
   testCompile group: 'com.typesafe', name: 'config', version: '1.3.2'
 }
 
 mainClassName = 'uk.gov.hmcts.reform.rhubarb.recipes.Application'
 
 bootJar {
-  archiveName = 'moj-rhubarb-recipes-service.jar'
+  archiveFileName = 'moj-rhubarb-recipes-service.jar'
 
   manifest {
     attributes('Implementation-Version': project.version.toString())
@@ -145,3 +152,8 @@ sonarqube {
     property "sonar.projectKey", "cnp-plum-recipes-service"
   }
 }
+
+wrapper {
+  distributionType = Wrapper.DistributionType.ALL
+}
+

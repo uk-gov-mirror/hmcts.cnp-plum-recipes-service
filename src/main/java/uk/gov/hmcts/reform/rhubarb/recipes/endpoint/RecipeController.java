@@ -25,7 +25,7 @@ import java.util.Map;
 )
 public class RecipeController {
 
-    private final RecipeStore recipeStore;
+    private final RecipeStore recipeStore; // NOPMD no need for accessors here
 
     public RecipeController(RecipeStore recipeStore) {
         this.recipeStore = recipeStore;

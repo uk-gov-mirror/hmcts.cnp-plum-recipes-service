@@ -25,7 +25,7 @@ public class GetAllRecipesTest {
     private static final String GET_ALL_RECIPES_PATH = "/recipes";
     private static final String PASSWORD_FOR_UNRECOGNISED_CLIENT_CERT = "testcert";
 
-    private final Config config = ConfigFactory.load();
+    private static final Config CONFIG = ConfigFactory.load();
 
     @Test
     public void should_accept_request_with_valid_certificate_and_subscription_key() throws Exception {
@@ -105,6 +105,7 @@ public class GetAllRecipesTest {
         assertThat(response.body().asString()).contains("Resource not found");
     }
 
+    @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
     private Response callAllRecipesEndpoint(
         Optional<KeyStoreWithPassword> clientKeyStore,
         Optional<String> subscriptionKey
@@ -114,8 +115,8 @@ public class GetAllRecipesTest {
         if (clientKeyStore.isPresent()) {
             request = request.config(
                 getSslConfigForClientCertificate(
-                    clientKeyStore.get().keyStore,
-                    clientKeyStore.get().password
+                    clientKeyStore.get().getKeyStore(),
+                    clientKeyStore.get().getPassword()
                 )
             );
         }
@@ -140,10 +141,10 @@ public class GetAllRecipesTest {
 
     private KeyStoreWithPassword getValidClientKeyStore() throws Exception {
         byte[] clientKeyStore = Base64.getDecoder().decode(
-            config.getString("client.key-store.content")
+            CONFIG.getString("client.key-store.content")
         );
 
-        String clientKeyStorePassword = config.getString("client.key-store.password");
+        String clientKeyStorePassword = CONFIG.getString("client.key-store.password");
 
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
         keyStore.load(new ByteArrayInputStream(clientKeyStore), clientKeyStorePassword.toCharArray());
@@ -156,7 +157,8 @@ public class GetAllRecipesTest {
 
         try (
             InputStream keyStoreStream =
-                this.getClass().getClassLoader().getResourceAsStream("unrecognised-client-certificate.pfx")
+                Thread.currentThread().getContextClassLoader()
+                    .getResourceAsStream("unrecognised-client-certificate.pfx")
         ) {
             // loading from null stream would cause a quiet failure
             assertThat(keyStoreStream).isNotNull();
@@ -168,24 +170,32 @@ public class GetAllRecipesTest {
     }
 
     private String getValidSubscriptionKey() {
-        String subscriptionKey = config.getString("client.subscription-key");
+        String subscriptionKey = CONFIG.getString("client.subscription-key");
         assertThat(subscriptionKey).as("Subscription key").isNotEmpty();
         return subscriptionKey;
     }
 
     private String getApiGatewayUrl() {
-        String apiUrl = config.getString("api.gateway-url");
+        String apiUrl = CONFIG.getString("api.gateway-url");
         assertThat(apiUrl).as("API gateway URL").isNotEmpty();
         return apiUrl;
     }
 
     private static class KeyStoreWithPassword {
-        public final KeyStore keyStore;
-        public final String password;
+        private final KeyStore keyStore;
+        private final String password;
 
         public KeyStoreWithPassword(KeyStore keyStore, String password) {
             this.keyStore = keyStore;
             this.password = password;
+        }
+
+        public KeyStore getKeyStore() {
+            return keyStore;
+        }
+
+        public String getPassword() {
+            return password;
         }
     }
 }
