@@ -15,7 +15,7 @@ locals {
   thumbprints_in_quotes = "${formatlist("&quot;%s&quot;", local.allowed_certificate_thumbprints)}"
   thumbprints_in_quotes_str = "${join(",", local.thumbprints_in_quotes)}"
   api_policy = "${replace(file("template/api-policy.xml"), "ALLOWED_CERTIFICATE_THUMBPRINTS", local.thumbprints_in_quotes_str)}"
-  api_base_path = "rhubarb-recipes-api"
+  api_base_path = "plum-recipes-api"
   shared_infra_rg = "${var.product}-shared-infrastructure-${var.env}"
   vault_name = "${var.product}si-${var.env}"
 }
