@@ -16,8 +16,7 @@ version = '0.0.1'
 
 pmd.toolVersion = '6.11.0'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = '11'
 
 checkstyle {
   toolVersion = '8.2'
@@ -80,6 +79,9 @@ dependencies {
   compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix', version: springHystrixVersion
   compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix-dashboard', version: springHystrixVersion
   compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
+
+  // needed for app insights
+  compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
 
   compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
   annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
