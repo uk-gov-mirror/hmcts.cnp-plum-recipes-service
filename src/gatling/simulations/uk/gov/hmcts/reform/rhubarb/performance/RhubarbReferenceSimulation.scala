@@ -9,7 +9,7 @@ import io.gatling.jdbc.Predef._
 class RhubarbReferenceSimulation extends Simulation {
 
 	val httpProtocol = http
-		.baseURL(Environments.baseUrl)
+		.baseUrl(Environments.baseUrl)
 		.inferHtmlResources()
 		.acceptHeader("image/webp,image/apng,image/*,*/*;q=0.8")
 		.acceptEncodingHeader("gzip, deflate")
