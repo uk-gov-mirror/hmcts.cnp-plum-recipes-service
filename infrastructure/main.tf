@@ -31,6 +31,7 @@ module "recipe-backend" {
   capacity               = "${var.capacity}"
   common_tags            = "${var.common_tags}"
   java_container_version = "9.0"
+  java_version           = "11"
 
   app_settings = {
     POSTGRES_HOST                      = "${module.recipe-database.host_name}"

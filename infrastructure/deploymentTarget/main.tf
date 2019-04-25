@@ -36,6 +36,8 @@ module "recipe-backend" {
   asp_name     = "${var.product}-${var.env}${var.deployment_target}"
   asp_rg       = "${local.shared_infra_rg}${var.deployment_target}"
   instance_size = "I1"
+  java_container_version = "9.0"
+  java_version           = "11"
   
   appinsights_instrumentation_key = "${data.azurerm_key_vault_secret.appInsights-InstrumentationKey.value}"
 
