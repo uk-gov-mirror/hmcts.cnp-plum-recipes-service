@@ -33,6 +33,8 @@ module "recipe-backend" {
   java_container_version = "9.0"
   java_version           = "11"
 
+  appinsights_instrumentation_key = "${data.azurerm_key_vault_secret.appInsights-InstrumentationKey.value}"
+
   app_settings = {
     POSTGRES_HOST                      = "${module.recipe-database.host_name}"
     POSTGRES_PORT                      = "${module.recipe-database.postgresql_listen_port}"
@@ -40,23 +42,18 @@ module "recipe-backend" {
     POSTGRES_USER                      = "${module.recipe-database.user_name}"
     POSTGRES_PASSWORD                  = "${module.recipe-database.postgresql_password}"
     WEBSITE_PROACTIVE_AUTOHEAL_ENABLED = "${var.autoheal}"
+    FORCE_RUN = "run-please"
   }
 }
-
-# module "key-vault" {
-#   source                  = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
-#   product                 = "${var.product}"
-#   env                     = "${var.env}"
-#   tenant_id               = "${var.tenant_id}"
-#   object_id               = "${var.jenkins_AAD_objectId}"
-#   resource_group_name     = "${module.recipe-backend.resource_group_name}"
-#   # dcd_cc-dev group object ID
-#   product_group_object_id = "38f9dea6-e861-4a50-9e73-21e64f563537"
-# }
 
 data "azurerm_key_vault" "key_vault" {
   name                = "${local.vault_name}"
   resource_group_name = "${local.shared_infra_rg}"
+}
+
+data "azurerm_key_vault_secret" "appInsights-InstrumentationKey" {
+  name         = "appInsights-InstrumentationKey"
+  key_vault_id = "${data.azurerm_key_vault.key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-USER" {
