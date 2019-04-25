@@ -1,23 +1,23 @@
 provider "azurerm" {
-  version = "1.19.0"
+  version = "1.22.1"
 }
 
 locals {
-  app = "recipe-backend"
+  app        = "recipe-backend"
   create_api = "${var.env != "preview" && var.env != "spreview"}"
 
   # list of the thumbprints of the SSL certificates that should be accepted by the API (gateway)
   allowed_certificate_thumbprints = [
     # API tests
-    "${var.api_gateway_test_certificate_thumbprint}"
+    "${var.api_gateway_test_certificate_thumbprint}",
   ]
 
-  thumbprints_in_quotes = "${formatlist("&quot;%s&quot;", local.allowed_certificate_thumbprints)}"
+  thumbprints_in_quotes     = "${formatlist("&quot;%s&quot;", local.allowed_certificate_thumbprints)}"
   thumbprints_in_quotes_str = "${join(",", local.thumbprints_in_quotes)}"
-  api_policy = "${replace(file("template/api-policy.xml"), "ALLOWED_CERTIFICATE_THUMBPRINTS", local.thumbprints_in_quotes_str)}"
-  api_base_path = "plum-recipes-api"
-  shared_infra_rg = "${var.product}-shared-infrastructure-${var.env}"
-  vault_name = "${var.product}si-${var.env}"
+  api_policy                = "${replace(file("template/api-policy.xml"), "ALLOWED_CERTIFICATE_THUMBPRINTS", local.thumbprints_in_quotes_str)}"
+  api_base_path             = "plum-recipes-api"
+  shared_infra_rg           = "${var.product}-shared-infrastructure-${var.env}"
+  vault_name                = "${var.product}si-${var.env}"
 }
 
 module "recipe-backend" {
@@ -42,7 +42,7 @@ module "recipe-backend" {
     POSTGRES_USER                      = "${module.recipe-database.user_name}"
     POSTGRES_PASSWORD                  = "${module.recipe-database.postgresql_password}"
     WEBSITE_PROACTIVE_AUTOHEAL_ENABLED = "${var.autoheal}"
-    FORCE_RUN = "run-please"
+    FORCE_RUN                          = "run-please"
   }
 }
 
@@ -87,17 +87,17 @@ resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
 }
 
 module "recipe-database" {
-  source = "git@github.com:hmcts/cnp-module-postgres?ref=master"
-  product = "${var.product}"
-  location = "${var.location}"
-  env = "${var.env}"
-  postgresql_user = "rhubarbadmin"
-  database_name = "rhubarb"
+  source             = "git@github.com:hmcts/cnp-module-postgres?ref=master"
+  product            = "${var.product}"
+  location           = "${var.location}"
+  env                = "${var.env}"
+  postgresql_user    = "rhubarbadmin"
+  database_name      = "rhubarb"
   postgresql_version = "10"
-  sku_name = "GP_Gen5_2"
-  sku_tier = "GeneralPurpose"
-  storage_mb = "51200"
-  common_tags = "${var.common_tags}"
+  sku_name           = "GP_Gen5_2"
+  sku_tier           = "GeneralPurpose"
+  storage_mb         = "51200"
+  common_tags        = "${var.common_tags}"
 }
 
 # region API (gateway)
@@ -114,13 +114,14 @@ resource "azurerm_template_deployment" "api" {
   count               = "${local.create_api ? 1 : 0}"
 
   parameters = {
-    apiManagementServiceName  = "core-api-mgmt-${var.env}"
-    apiName                   = "plum-recipes-api"
-    apiProductName            = "plum-recipes"
-    serviceUrl                = "http://${var.product}-${local.app}-${var.env}.service.core-compute-${var.env}.internal"
-    apiBasePath               = "${local.api_base_path}"
-    policy                    = "${local.api_policy}"
+    apiManagementServiceName = "core-api-mgmt-${var.env}"
+    apiName                  = "plum-recipes-api"
+    apiProductName           = "plum-recipes"
+    serviceUrl               = "http://${var.product}-${local.app}-${var.env}.service.core-compute-${var.env}.internal"
+    apiBasePath              = "${local.api_base_path}"
+    policy                   = "${local.api_policy}"
   }
 }
 
 # endregion
+
