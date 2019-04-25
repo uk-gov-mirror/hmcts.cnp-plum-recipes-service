@@ -7,7 +7,7 @@ java:
     POSTGRES_USER: hmcts
     POSTGRES_PASSWORD: hmcts
   # Don't modify below here
-  image: 'https://hmctssandbox.azurecr.io/hmcts/crumble-recipe-backend:latest'
+  image: 'hmctssandbox.azurecr.io/hmcts/crumble-recipe-backend:latest'
   postgresql:
     postgresqlUsername: hmcts
     postgresqlPassword: hmcts

@@ -7,7 +7,7 @@ java:
     POSTGRES_USER: hmcts
     POSTGRES_PASSWORD: hmcts
   # Don't modify below here
-  image: 'https://hmcts.azurecr.io/hmcts/plum-recipe-backend:latest'
+  image: 'hmcts.azurecr.io/hmcts/plum-recipe-backend:latest'
   postgresql:
     postgresqlUsername: hmcts
     postgresqlPassword: hmcts
