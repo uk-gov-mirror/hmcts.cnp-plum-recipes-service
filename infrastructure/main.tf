@@ -42,7 +42,7 @@ module "recipe-backend" {
     POSTGRES_USER                      = "${module.recipe-database.user_name}"
     POSTGRES_PASSWORD                  = "${module.recipe-database.postgresql_password}"
     WEBSITE_PROACTIVE_AUTOHEAL_ENABLED = "${var.autoheal}"
-    FORCE_RUN                          = "run-please"
+    FORCE_RUN                          = "run-please2"
   }
 }
 
