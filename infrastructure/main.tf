@@ -15,7 +15,7 @@ locals {
   thumbprints_in_quotes     = "${formatlist("&quot;%s&quot;", local.allowed_certificate_thumbprints)}"
   thumbprints_in_quotes_str = "${join(",", local.thumbprints_in_quotes)}"
   api_policy                = "${replace(file("template/api-policy.xml"), "ALLOWED_CERTIFICATE_THUMBPRINTS", local.thumbprints_in_quotes_str)}"
-  api_base_path             = "plum-recipes-api"
+  api_base_path             = "${var.product}-recipes-api"
   shared_infra_rg           = "${var.product}-shared-infrastructure-${var.env}"
   vault_name                = "${var.product}si-${var.env}"
 }
@@ -57,33 +57,33 @@ data "azurerm_key_vault_secret" "appInsights-InstrumentationKey" {
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-USER" {
-  name      = "recipe-backend-POSTGRES-USER"
-  value     = "${module.recipe-database.user_name}"
-  vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
+  name         = "recipe-backend-POSTGRES-USER"
+  value        = "${module.recipe-database.user_name}"
+  key_vault_id = "${data.azurerm_key_vault.key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
-  name      = "recipe-backend-POSTGRES-PASS"
-  value     = "${module.recipe-database.postgresql_password}"
-  vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
+  name         = "recipe-backend-POSTGRES-PASS"
+  value        = "${module.recipe-database.postgresql_password}"
+  key_vault_id = "${data.azurerm_key_vault.key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_HOST" {
-  name      = "recipe-backend-POSTGRES-HOST"
-  value     = "${module.recipe-database.host_name}"
-  vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
+  name         = "recipe-backend-POSTGRES-HOST"
+  value        = "${module.recipe-database.host_name}"
+  key_vault_id = "${data.azurerm_key_vault.key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_PORT" {
-  name      = "recipe-backend-POSTGRES-PORT"
-  value     = "${module.recipe-database.postgresql_listen_port}"
-  vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
+  name         = "recipe-backend-POSTGRES-PORT"
+  value        = "${module.recipe-database.postgresql_listen_port}"
+  key_vault_id = "${data.azurerm_key_vault.key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
-  name      = "recipe-backend-POSTGRES-DATABASE"
-  value     = "${module.recipe-database.postgresql_database}"
-  vault_uri = "${data.azurerm_key_vault.key_vault.vault_uri}"
+  name         = "recipe-backend-POSTGRES-DATABASE"
+  value        = "${module.recipe-database.postgresql_database}"
+  key_vault_id = "${data.azurerm_key_vault.key_vault.id}"
 }
 
 module "recipe-database" {
@@ -115,8 +115,8 @@ resource "azurerm_template_deployment" "api" {
 
   parameters = {
     apiManagementServiceName = "core-api-mgmt-${var.env}"
-    apiName                  = "plum-recipes-api"
-    apiProductName           = "plum-recipes"
+    apiName                  = "${var.product}-recipes-api"
+    apiProductName           = "${var.product}-recipes"
     serviceUrl               = "http://${var.product}-${local.app}-${var.env}.service.core-compute-${var.env}.internal"
     apiBasePath              = "${local.api_base_path}"
     policy                   = "${local.api_policy}"
