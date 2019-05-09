@@ -128,7 +128,7 @@ reveal the key. You will need to provide this value in your request to the API.
 In the directory containing your `private.pem` and `cert.pem` files run the following command:
 
 ```
-curl -v --key private.pem --cert cert.pem https://core-api-mgmt-{environment}.azure-api.net/plum-recipes-api/ -H "Ocp-Apim-Subscription-Key:{subscription key}"
+curl -v --key private.pem --cert cert.pem https://core-api-mgmt-{environment}.azure-api.net/plum-recipes-api/recipes -H "Ocp-Apim-Subscription-Key:{subscription key}"
 ```
 
 You should receive an HTTP response with status 200 and a JSON body containing a list of recipes, e.g.:
