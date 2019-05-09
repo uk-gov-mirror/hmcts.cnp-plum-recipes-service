@@ -1,4 +1,4 @@
-# Rhubarb Recipes API
+# Plum Recipes API
 
 ## Purpose
 
@@ -49,7 +49,7 @@ You should get a response similar to this:
 
 ## API
 
-The Rhubarb Recipes service has an API (in Azure API Management Service) set up in Terraform. The API serves as
+The Plum Recipes service has an API (in Azure API Management Service) set up in Terraform. The API serves as
 a proxy that lets authenticated requests reach specific endpoints of the service (in this case, the "Find all
 your recipes" (/recipes) endpoint). A request, in order to be let through, must meet the following requirements:
 
@@ -128,7 +128,7 @@ reveal the key. You will need to provide this value in your request to the API.
 In the directory containing your `private.pem` and `cert.pem` files run the following command:
 
 ```
-curl -v --key private.pem --cert cert.pem https://core-api-mgmt-{environment}.azure-api.net/rhubarb-recipes-api/ - H "Ocp-Apim-Subscription-Key:{subscription key}"
+curl -v --key private.pem --cert cert.pem https://core-api-mgmt-{environment}.azure-api.net/plum-recipes-api/ - H "Ocp-Apim-Subscription-Key:{subscription key}"
 ```
 
 You should receive an HTTP response with status 200 and a JSON body containing a list of recipes, e.g.:
