@@ -22,7 +22,6 @@ properties([
     string(name: 'APP', defaultValue: 'recipe-backend', description: ''),
     string(name: 'TYPE', defaultValue: 'java', description: ''),
     string(name: 'ENVIRONMENT', defaultValue: 'sandbox', description: 'Environment where code should be build and deployed'),
-    string(name: 'DEPLOYMENT_TARGET', defaultValue: '-v2', description: 'Deployment Target where code should be build and deployed'),
     choice(name: 'SUBSCRIPTION', choices: 'sandbox\nnonprod\nprod\nhmctsdemo', description: 'Azure subscriptions available to build in')
   ]),
   [$class: 'GithubProjectProperty', projectUrlStr: 'github.com/contino/moj-plum-recipes-service'],
@@ -30,7 +29,7 @@ properties([
 ])
 
 
-withParameterizedPipeline(params.TYPE, params.PRODUCT_NAME, params.APP, params.ENVIRONMENT, params.SUBSCRIPTION, params.DEPLOYMENT_TARGET) {
+withParameterizedPipeline(params.TYPE, params.PRODUCT_NAME, params.APP, params.ENVIRONMENT, params.SUBSCRIPTION) {
   //enableApiGatewayTest()
 
   onNonPR() {
