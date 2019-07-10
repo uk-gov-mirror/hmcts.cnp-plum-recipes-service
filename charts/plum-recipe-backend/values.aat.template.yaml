@@ -5,6 +5,7 @@ java:
   environment:
     POSTGRES_SSL_MODE: require
   keyVaults:
+    aadIdentityName: cnp
     "plumsi":
       resourceGroup: plum-shared-infrastructure
       secrets:
