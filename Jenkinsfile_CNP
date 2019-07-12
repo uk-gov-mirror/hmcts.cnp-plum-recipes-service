@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@dns-registration")
+@Library("Infrastructure@dns-and-registry")
 
 def type = "java"
 def product = "plum"
