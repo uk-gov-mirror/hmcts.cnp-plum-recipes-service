@@ -13,6 +13,7 @@ services:
       POSTGRES_USER: rhubarbuser
       POSTGRES_PASSWORD: rhubarbpassword
       POSTGRES_SSL_MODE: disable
+      AZURE_APPLICATIONINSIGHTS_INSTRUMENTATIONKEY:
       JAVA_OPTS:
     ports:
       - 9080:4550
