@@ -47,6 +47,7 @@ withPipeline(type, product, app) {
   enableDockerBuild()
   installCharts()
   enableAksStagingDeployment()
+  disableLegacyDeployment()
   onNonPR() {
     loadVaultSecrets(apiTestSecrets)
   }
