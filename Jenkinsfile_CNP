@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@feature/use-jenkins-sp-to-get-helm-tls") _
+@Library("Infrastructure") _
 
 def type = "java"
 def product = "plum"
