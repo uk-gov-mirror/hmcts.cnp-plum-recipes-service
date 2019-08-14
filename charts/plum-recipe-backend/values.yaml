@@ -7,4 +7,4 @@ java:
     POSTGRES_USER: "{{ .Values.postgresql.postgresqlUsername}}"
     POSTGRES_PASSWORD: "{{ .Values.postgresql.postgresqlPassword}}"
   # Don't modify below here
-  image: 'hmcts.azurecr.io/hmcts/plum-recipe-backend:latest'
+  image: 'https://hmctspublic.azurecr.io/plum/recipe-backend:latest'
