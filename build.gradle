@@ -42,7 +42,7 @@ dependencyCheck {
 
 def springBootVersion = springBoot.class.package.implementationVersion
 def springfoxSwagger = '2.9.2'
-def javaLoggingVersion = '5.1.0-beta'
+def javaLoggingVersion = '5.1.0'
 
 repositories {
   jcenter()
@@ -71,11 +71,11 @@ configurations.all {
   resolutionStrategy {
     eachDependency { DependencyResolveDetails details ->
       if (details.requested.group in ['com.fasterxml.jackson.core', 'com.fasterxml.jackson.module', 'com.fasterxml.jackson.datatype']) {
-        details.useVersion '2.9.9'
+        details.useVersion '2.9.10'
       }
-      
+
       if (details.requested.name == 'jackson-databind') {
-        details.useVersion '2.9.9.3'
+        details.useVersion '2.9.10'
       }
     }
   }
@@ -92,9 +92,9 @@ dependencies {
   compile group: 'uk.gov.hmcts.reform', name: 'properties-volume-spring-boot-starter', version: '0.0.4'
 
   compile group: 'com.google.guava', name: 'guava', version: '28.0-jre'
-  
-  compile group: 'uk.gov.hmcts.reform', name: 'java-logging', version: javaLoggingVersion
-  compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: javaLoggingVersion
+
+  compile group: 'uk.gov.hmcts.reform', name: 'logging', version: javaLoggingVersion
+  compile group: 'uk.gov.hmcts.reform', name: 'logging-appinsights', version: javaLoggingVersion
   compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
 
   compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
