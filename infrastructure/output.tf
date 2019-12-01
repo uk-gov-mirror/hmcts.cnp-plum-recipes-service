@@ -1,5 +1,5 @@
 output "app_namespace" {
-  value = "${var.deployment_namespace}"
+  value = var.deployment_namespace
 }
 
 # this variable will be accessible to tests as API_GATEWAY_URL environment variable
@@ -8,5 +8,5 @@ output "api_gateway_url" {
 }
 
 output "vaultName" {
-  value = "${local.vault_name}"
+  value = local.vault_name
 }
