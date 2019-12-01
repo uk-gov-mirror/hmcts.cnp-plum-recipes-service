@@ -3,6 +3,8 @@ variable "product" {
   default = "plum"
 }
 
+variable "component" {}
+
 variable "location" {
   type    = "string"
   default = "UK South"
