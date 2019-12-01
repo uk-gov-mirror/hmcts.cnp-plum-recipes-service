@@ -21,7 +21,7 @@ locals {
 }
 
 module "recipe-backend" {
-  source                 = "git@github.com:hmcts/cnp-module-webapp?ref=master"
+  source                 = "git@github.com:hmcts/cnp-module-webapp?ref=tf-0.12.x"
   product                = "${var.product}-${local.app}"
   location               = var.location
   env                    = var.env
@@ -87,7 +87,7 @@ resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
 }
 
 module "recipe-database" {
-  source             = "git@github.com:hmcts/cnp-module-postgres?ref=master"
+  source             = "git@github.com:hmcts/cnp-module-postgres?ref=tf-0.12.x"
   product            = var.product
   location           = var.location
   env                = var.env
