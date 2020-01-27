@@ -31,4 +31,12 @@
     <cve>CVE-2019-12418</cve>
   </suppress>
 
+  <suppress>
+   <notes><![CDATA[
+   file name: spring-security-crypto-5.1.5.RELEASE.jar
+   ]]></notes>
+   <packageUrl regex="true">^pkg:maven/org\.springframework\.security/spring\-security\-crypto@.*$</packageUrl>
+   <cve>CVE-2020-5398</cve>
+  </suppress>
+
 </suppressions>
