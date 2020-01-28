@@ -33,10 +33,10 @@
 
   <suppress>
    <notes><![CDATA[
-   file name: spring-security-crypto-5.1.5.RELEASE.jar
+   this is a false positive. The vulnerability was resolved when upgrading spring boot version to 2.2.4
    ]]></notes>
    <packageUrl regex="true">^pkg:maven/org\.springframework\.security/spring\-security\-crypto@.*$</packageUrl>
-   <cve>CVE-2020-5398</cve>
+   <cve>CVE-2018-1258</cve>
   </suppress>
 
 </suppressions>
