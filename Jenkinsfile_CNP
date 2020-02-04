@@ -37,5 +37,4 @@ withPipeline(type, product, component) {
   //   currentBuild.description = "Success!"
   //   error 'Plun wont be built on prod environment yet.'
   // }
-  
 }
