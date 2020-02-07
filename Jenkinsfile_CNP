@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@test-slack-notify-success") _
+@Library("Infrastructure") _
 
 def type = "java"
 def product = "plum"
