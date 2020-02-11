@@ -19,7 +19,7 @@ pmd.toolVersion = '6.11.0'
 sourceCompatibility = '11'
 
 checkstyle {
-  toolVersion = '8.24'
+  toolVersion = '8.29'
   configFile = new File(rootDir, "checkstyle.xml")
   maxWarnings = 0
 }
