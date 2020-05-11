@@ -38,5 +38,12 @@
    <packageUrl regex="true">^pkg:maven/org\.springframework\.security/spring\-security\-crypto@.*$</packageUrl>
    <cve>CVE-2018-1258</cve>
   </suppress>
+  
+  <suppress>
+  <notes><![CDATA[
+   only affects log appender over SMTP ]]></notes>
+  <cve>CVE-2020-9488</cve>
+  </suppress>
+
 
 </suppressions>
