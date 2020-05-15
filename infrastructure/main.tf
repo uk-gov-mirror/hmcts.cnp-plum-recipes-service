@@ -20,40 +20,9 @@ locals {
   vault_name                = "${var.product}si-${var.env}"
 }
 
-module "recipe-backend" {
-  source                 = "git@github.com:hmcts/cnp-module-webapp?ref=master"
-  product                = "${var.product}-${local.app}"
-  location               = var.location
-  env                    = var.env
-  ilbIp                  = var.ilbIp
-  subscription           = var.subscription
-  is_frontend            = false
-  capacity               = var.capacity
-  common_tags            = var.common_tags
-  java_container_version = "9.0"
-  java_version           = "11"
-
-  appinsights_instrumentation_key = data.azurerm_key_vault_secret.appInsights-InstrumentationKey.value
-
-  app_settings = {
-    POSTGRES_HOST                      = module.recipe-database.host_name
-    POSTGRES_PORT                      = module.recipe-database.postgresql_listen_port
-    POSTGRES_DATABASE                  = module.recipe-database.postgresql_database
-    POSTGRES_USER                      = module.recipe-database.user_name
-    POSTGRES_PASSWORD                  = module.recipe-database.postgresql_password
-    WEBSITE_PROACTIVE_AUTOHEAL_ENABLED = var.autoheal
-    FORCE_RUN                          = "run-please2"
-  }
-}
-
 data "azurerm_key_vault" "key_vault" {
   name                = local.vault_name
   resource_group_name = local.shared_infra_rg
-}
-
-data "azurerm_key_vault_secret" "appInsights-InstrumentationKey" {
-  name         = "appInsights-InstrumentationKey"
-  key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-USER" {

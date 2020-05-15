@@ -46,6 +46,7 @@ withPipeline(type, product, app) {
   enablePerformanceTest()
   installCharts()
   enableAksStagingDeployment()
+  disableLegacyDeployment()
   onNonPR() {
     loadVaultSecrets(apiTestSecrets)
   }
