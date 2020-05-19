@@ -1,5 +1,6 @@
 java:
   applicationPort: 4550
+  readinessPath: '/health/readiness'
   environment:
     POSTGRES_HOST: "{{ .Release.Name }}-postgresql"
     POSTGRES_SSL_MODE: disable
