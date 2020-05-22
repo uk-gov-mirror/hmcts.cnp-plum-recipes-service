@@ -24,7 +24,6 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 }
 
 withPipeline(type, product, component) {
-  installCharts()
   enablePerformanceTest()
   enableAksStagingDeployment()
   disableLegacyDeployment()
