@@ -1,5 +1,5 @@
 provider "azurerm" {
-  version = "1.27.0"
+  version = "1.28.0"
 }
 
 locals {
@@ -71,18 +71,31 @@ module "recipe-database" {
 }
 
 # region API (gateway)
+
+module "plum_product" {
+  source = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
+
+  api_mgmt_name = "core-api-mgmt-${var.env}"
+  api_mgmt_rg   = "core-infra-${var.env}"
+
+  name = "plum-recipes"
+}
+
 module "api" {
   source        = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
   name          = "${var.product}-recipes-api"
   api_mgmt_rg   = "core-infra-${var.env}"
   api_mgmt_name = "core-api-mgmt-${var.env}"
   display_name  = "${var.product}-recipes"
+  revision      = "1"
+  product_id    = "${module.plum_product.product_id}"
   path          = local.api_base_path
   service_url   = "http://${var.product}-${local.app}-${var.env}.service.core-compute-${var.env}.internal"
+  swagger_url   = "/recipes"
 }
 
 data "template_file" "plum_api_policy_template" {
-  template = file("${path.module}/templates/api-policy.xml")
+  template = file("${path.module}/template/api-policy.xml")
 
   vars = {
     allowed_certificate_thumbprints = local.thumbprints_in_quotes_str
@@ -93,8 +106,8 @@ module "policy" {
   source                 = "git@github.com:hmcts/cnp-module-api-mgmt-api-policy?ref=master"
   api_mgmt_name          = "core-api-mgmt-${var.env}"
   api_mgmt_rg            = "core-infra-${var.env}"
-  api_name               = module.api.name
-  api_policy_xml_content = data.template_file.plum_api_policy_template.rendered
+  api_name               = "${module.api.name}"
+  api_policy_xml_content = "${data.template_file.plum_api_policy_template.rendered}"
 }
 # endregion
 
