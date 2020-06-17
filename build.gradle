@@ -14,7 +14,13 @@ plugins {
 group = 'uk.gov.hmcts.reform'
 version = '0.0.1'
 
-pmd.toolVersion = '6.11.0'
+pmd {
+  toolVersion = "6.18.0"
+  reportsDir = file("$project.buildDir/reports/pmd")
+  // // https://github.com/pmd/pmd/issues/876
+  // ruleSets = []
+  // ruleSetFiles = files("config/pmd/ruleset.xml")
+}
 
 sourceCompatibility = '11'
 
@@ -95,6 +101,7 @@ dependencies {
   compile group: 'uk.gov.hmcts.reform', name: 'logging', version: javaLoggingVersion
   compile group: 'uk.gov.hmcts.reform', name: 'logging-appinsights', version: javaLoggingVersion
   compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
+  compile group: 'io.springfox', name: 'springfox-swagger-ui', version: springfoxSwagger
 
   compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
   annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
@@ -165,6 +172,7 @@ sonarqube {
   properties {
     property "sonar.projectName", "cnp-plum-recipes-service"
     property "sonar.projectKey", "cnp-plum-recipes-service"
+     property "sonar.dependencyCheck.reportPath", "${project.buildDir}/reports/dependency-check-report.xml"
   }
 }
 

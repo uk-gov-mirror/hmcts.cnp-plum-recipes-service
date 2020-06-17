@@ -91,7 +91,7 @@ module "api" {
   product_id    = "${module.plum_product.product_id}"
   path          = local.api_base_path
   service_url   = "http://${var.product}-${local.app}-${var.env}.service.core-compute-${var.env}.internal"
-  swagger_url   = "/recipes"
+  swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cnp-plum-recipes-service.json"
 }
 
 data "template_file" "plum_api_policy_template" {
