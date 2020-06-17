@@ -21,7 +21,7 @@ jobs:
         with:
           java-version: 8
       - name: Run Swagger Publisher
-        run: ./gradlew integration --tests uk.gov.hmcts.reform.rhubarb.recipes.SwaggerPublisher
+        run: ./gradlew tests --tests uk.gov.hmcts.reform.rhubarb.recipes.SwaggerPublisher
       - name: Commit to repository
         run: |
           mkdir swagger-staging

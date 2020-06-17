@@ -1,15 +1,11 @@
 package uk.gov.hmcts.reform.rhubarb.recipes;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -17,30 +13,23 @@ import java.nio.file.Paths;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
-@SpringJUnitWebConfig
-@SpringBootTest
+/**
+ * Built-in feature which saves service's swagger specs in temporary directory.
+ * Each Github Action run on master should automatically save and upload (if updated) documentation.
+ */
 @AutoConfigureMockMvc
+@SpringBootTest
 class SwaggerPublisher {
 
-    private transient MockMvc mvc;
-
     @Autowired
-    private transient WebApplicationContext webAppContext;
-
-    @BeforeEach
-    void setUp() {
-        this.mvc = webAppContextSetup(webAppContext).build();
-    }
-
+    @SuppressWarnings("PMD.BeanMembersShouldSerialize")
+    private MockMvc mvc;
 
     @DisplayName("Generate swagger documentation")
     @Test
-    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
     void generateDocs() throws Exception {
-        ResultActions perform = mvc.perform(get("/v2/api-docs"));
-        byte[] specs = perform
+        byte[] specs = mvc.perform(get("/v2/api-docs"))
             .andExpect(status().isOk())
             .andReturn()
             .getResponse()

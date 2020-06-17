@@ -29,7 +29,7 @@ import static uk.gov.hmcts.reform.rhubarb.recipes.domain.ErrorCode.SERVER_ERROR;
 @ControllerAdvice
 public class EndpointExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(EndpointExceptionHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EndpointExceptionHandler.class);
 
     @Override
     protected ResponseEntity<Object> handleServletRequestBindingException(
@@ -38,7 +38,7 @@ public class EndpointExceptionHandler extends ResponseEntityExceptionHandler {
         HttpStatus status,
         WebRequest request
     ) {
-        log.error(ex.getMessage(), ex);
+        LOGGER.error(ex.getMessage(), ex);
 
         return new ResponseEntity<>(
             new ErrorResult(INVALID_AUTH_TOKEN, singletonList("Authorization header is required.")),
@@ -53,7 +53,7 @@ public class EndpointExceptionHandler extends ResponseEntityExceptionHandler {
         HttpStatus status,
         WebRequest request
     ) {
-        log.error(ex.getMessage(), ex);
+        LOGGER.error(ex.getMessage(), ex);
 
         return new ResponseEntity<>(
             new ErrorResult(BAD_ARGUMENT, singletonList("The draft document is required.")),
@@ -69,14 +69,14 @@ public class EndpointExceptionHandler extends ResponseEntityExceptionHandler {
         HttpStatus status,
         WebRequest request
     ) {
-        log.error(ex.getMessage(), ex);
+        LOGGER.error(ex.getMessage(), ex);
         return super.handleExceptionInternal(ex, body, headers, status, request);
     }
 
 
     @ExceptionHandler(NoRecipeFoundException.class)
     public ResponseEntity<ErrorResult> handleNoDocumentFoundException(HttpServletRequest req, Exception exception) {
-        log.debug("no draft document found for user.");
+        LOGGER.debug("no draft document found for user.");
 
         return new ResponseEntity<>(
             new ErrorResult(NO_RECORD_FOUND, singletonList(exception.getMessage())),
@@ -86,7 +86,7 @@ public class EndpointExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResult> unknownException(HttpServletRequest req, Exception exception) {
-        log.error(exception.getMessage(), exception);
+        LOGGER.error(exception.getMessage(), exception);
         return new ResponseEntity<>(
             new ErrorResult(SERVER_ERROR, emptyList()),
             INTERNAL_SERVER_ERROR
