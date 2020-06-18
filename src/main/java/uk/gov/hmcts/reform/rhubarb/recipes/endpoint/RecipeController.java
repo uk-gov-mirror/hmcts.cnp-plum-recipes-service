@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import uk.gov.hmcts.reform.rhubarb.recipes.data.RecipeStore;
 import uk.gov.hmcts.reform.rhubarb.recipes.domain.ErrorResult;
@@ -16,7 +15,6 @@ import uk.gov.hmcts.reform.rhubarb.recipes.domain.RecipeList;
 import uk.gov.hmcts.reform.rhubarb.recipes.exception.NoRecipeFoundException;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(
@@ -51,9 +49,7 @@ public class RecipeController {
     @ApiResponses({
         @ApiResponse(code = 200, message = "Success"),
     })
-    public RecipeList readAll(
-        @RequestParam(required = false) Map<String, String> params
-    ) {
+    public RecipeList readAll() {
 
         List<Recipe> recipes = recipeStore.readAll();
 
