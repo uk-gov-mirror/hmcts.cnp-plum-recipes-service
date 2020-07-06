@@ -81,6 +81,10 @@ configurations.all {
       if (details.requested.name == 'jackson-databind') {
         details.useVersion '2.10.1'
       }
+
+      if (details.requested.group in ['org.apache.tomcat.embed']) {
+        details.useVersion '9.0.37'
+      }
     }
   }
 }
