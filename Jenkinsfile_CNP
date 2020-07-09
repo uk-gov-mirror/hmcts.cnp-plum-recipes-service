@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@charts_enable_git") _
+@Library("Infrastructure") _
 
 def type = "java"
 def product = "plum"
