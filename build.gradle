@@ -85,6 +85,10 @@ configurations.all {
       if (details.requested.group in ['org.apache.tomcat.embed']) {
         details.useVersion '9.0.37'
       }
+
+      if (details.requested.name in ['jaxb-osgi']) {
+        details.useVersion '2.3.3'
+      }
     }
   }
 }
