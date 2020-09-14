@@ -1,5 +1,5 @@
 provider "azurerm" {
-  version = "1.28.0"
+  features {}
 }
 
 locals {
@@ -89,7 +89,7 @@ module "api" {
   api_mgmt_name = "core-api-mgmt-${var.env}"
   display_name  = "${var.product}-recipes"
   revision      = "1"
-  product_id    = "${module.plum_product.product_id}"
+  product_id    = module.plum_product.product_id
   path          = local.api_base_path
   service_url   = "http://${var.product}-${local.app}-${var.env}.service.core-compute-${var.env}.internal"
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cnp-plum-recipes-service.json"
@@ -99,8 +99,8 @@ module "policy" {
   source                 = "git@github.com:hmcts/cnp-module-api-mgmt-api-policy?ref=master"
   api_mgmt_name          = "core-api-mgmt-${var.env}"
   api_mgmt_rg            = "core-infra-${var.env}"
-  api_name               = "${module.api.name}"
-  api_policy_xml_content = "${local.api_policy}"
+  api_name               = module.api.name
+  api_policy_xml_content = local.api_policy
 }
 # endregion
 
