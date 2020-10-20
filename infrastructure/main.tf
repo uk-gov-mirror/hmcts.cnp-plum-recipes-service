@@ -58,12 +58,12 @@ resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
 
 module "recipe-database" {
   source             = "git@github.com:hmcts/cnp-module-postgres?ref=master"
-  product            = "${var.product}-v11"
+  product            = var.product
   location           = var.location
   env                = var.env
   postgresql_user    = "rhubarbadmin"
   database_name      = "rhubarb"
-  postgresql_version = "11"
+  postgresql_version = "10"
   sku_name           = "GP_Gen5_2"
   sku_tier           = "GeneralPurpose"
   storage_mb         = "51200"
