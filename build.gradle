@@ -102,7 +102,7 @@ dependencies {
   compile group: 'org.flywaydb', name: 'flyway-core', version: '5.2.4'
   compile group: 'uk.gov.hmcts.reform', name: 'properties-volume-spring-boot-starter', version: '0.1.0'
 
-  compile group: 'com.google.guava', name: 'guava', version: '28.0-jre'
+  compile group: 'com.google.guava', name: 'guava', version: '30.0-jre'
 
   compile group: 'uk.gov.hmcts.reform', name: 'logging', version: javaLoggingVersion
   compile group: 'uk.gov.hmcts.reform', name: 'logging-appinsights', version: javaLoggingVersion
