@@ -56,6 +56,13 @@ resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
+resource "azurerm_management_lock" "resource-group-level" {
+  name       = "resource-group-level"
+  scope      = local.shared_infra_rg.id
+  lock_level = "CanNotDelete"
+  notes      = "This Resource Group can't be deleted"
+}
+
 module "recipe-database" {
   source             = "git@github.com:hmcts/cnp-module-postgres?ref=master"
   product            = var.product
