@@ -109,7 +109,7 @@ dependencies {
   compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
   compile group: 'io.springfox', name: 'springfox-swagger-ui', version: springfoxSwagger
 
-  compile 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.3'
+  compile 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.0'
 
   compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
   annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
