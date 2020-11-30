@@ -3,3 +3,5 @@ java:
   readinessPath: '/health/readiness'
   # Don't modify below here
   image: 'hmctspublic.azurecr.io/plum/recipe-backend:latest'
+  environment:
+    POSTGRES_SSL_MODE: require
