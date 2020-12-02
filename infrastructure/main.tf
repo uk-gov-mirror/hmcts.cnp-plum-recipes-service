@@ -57,8 +57,9 @@ resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
 }
 
 module "recipe-database" {
-  source             = "git@github.com:hmcts/cnp-module-postgres?ref=master"
+  source             = "git@github.com:hmcts/cnp-module-postgres?ref=use-user-account-for-delegating-access"
   product            = var.product
+  name               = var.product
   location           = var.location
   env                = var.env
   postgresql_user    = "rhubarbadmin"
