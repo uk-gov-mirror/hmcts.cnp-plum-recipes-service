@@ -3,7 +3,7 @@ spring:
     propertiesvolume:
       enabled: true
       prefixed: true
-      paths: /mnt/secrets/plumsi,/mnt/secrets/crumblesi
+      paths: /mnt/secrets/plumsi,/mnt/secrets/crumblesi,/mnt/secrets/toffee
       aliases:
         plumsi.recipe-backend-POSTGRES-DATABASE: POSTGRES_DATABASE
         plumsi.recipe-backend-POSTGRES-HOST: POSTGRES_HOST
@@ -13,4 +13,7 @@ spring:
         crumblesi.recipe-backend-POSTGRES-HOST: POSTGRES_HOST
         crumblesi.recipe-backend-POSTGRES-USER: POSTGRES_USER
         crumblesi.recipe-backend-POSTGRES-PASS: POSTGRES_PASSWORD
-
+        toffee.recipe-backend-POSTGRES-DATABASE: POSTGRES_DATABASE
+        toffee.recipe-backend-POSTGRES-HOST: POSTGRES_HOST
+        toffee.recipe-backend-POSTGRES-USER: POSTGRES_USER
+        toffee.recipe-backend-POSTGRES-PASS: POSTGRES_PASSWORD
