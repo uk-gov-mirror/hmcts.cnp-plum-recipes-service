@@ -89,6 +89,15 @@ configurations.all {
       if (details.requested.name in ['jaxb-osgi']) {
         details.useVersion '2.3.3'
       }
+
+      if (details.requested.group == 'org.codehaus.groovy') {
+        details.useVersion "3.0.2"
+        details.because "needed by rest-assured>=4.3"
+      }
+
+      if (details.requested.group in ['org.apache.tomcat.embed']) {
+        details.useVersion '9.0.39'
+      }
     }
   }
 }
@@ -108,8 +117,6 @@ dependencies {
   compile group: 'uk.gov.hmcts.reform', name: 'logging-appinsights', version: javaLoggingVersion
   compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
   compile group: 'io.springfox', name: 'springfox-swagger-ui', version: springfoxSwagger
-
-  compile 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.0'
 
   compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
   annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
@@ -189,6 +196,10 @@ sonarqube {
 }
 
 test {
+  useJUnitPlatform()
+}
+
+tasks.withType(Test) {
   useJUnitPlatform()
 }
 
