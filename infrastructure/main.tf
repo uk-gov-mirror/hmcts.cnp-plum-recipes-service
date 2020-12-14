@@ -2,6 +2,12 @@ provider "azurerm" {
   features {}
 }
 
+provider "azurerm" {
+  features {}
+  alias           = "private_dns"
+  subscription_id = var.private_dns_subscription_id
+}
+
 locals {
   app        = "recipe-backend"
   create_api = var.env != "preview" && var.env != "spreview"
@@ -19,6 +25,12 @@ locals {
   api_base_path             = "${var.product}-recipes-api"
   shared_infra_rg           = "${var.product}-shared-infrastructure-${var.env}"
   vault_name                = "${var.product}si-${var.env}"
+}
+
+data "azurerm_subnet" "postgres" {
+  name                 = "core-infra-subnet-0-${var.env}"
+  resource_group_name  = "core-infra-${var.env}"
+  virtual_network_name = "core-infra-vnet-${var.env}"
 }
 
 data "azurerm_key_vault" "key_vault" {
@@ -57,31 +69,31 @@ resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-USER-V11" {
-  name         = "recipe-backend-POSTGRES-USER"
+  name         = "recipe-backend-POSTGRES-USER-v11"
   value        = module.recipe-database-v11.user_name
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-PASS-V11" {
-  name         = "recipe-backend-POSTGRES-PASS"
+  name         = "recipe-backend-POSTGRES-PASS-v11"
   value        = module.recipe-database-v11.postgresql_password
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_HOST-V11" {
-  name         = "recipe-backend-POSTGRES-HOST"
+  name         = "recipe-backend-POSTGRES-HOST-v11"
   value        = module.recipe-database-v11.host_name
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_PORT-V11" {
-  name         = "recipe-backend-POSTGRES-PORT"
+  name         = "recipe-backend-POSTGRES-PORT-v11"
   value        = module.recipe-database-v11.postgresql_listen_port
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_DATABASE-V11" {
-  name         = "recipe-backend-POSTGRES-DATABASE"
+  name         = "recipe-backend-POSTGRES-DATABASE-v11"
   value        = module.recipe-database-v11.postgresql_database
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
@@ -103,6 +115,10 @@ module "recipe-database" {
 }
 
 module "recipe-database-v11" {
+  providers = {
+    azurerm             = azurerm
+    azurerm.private_dns = azurerm.private_dns
+  }
   source             = "git@github.com:hmcts/cnp-module-postgres?ref=postgresql_tf"
   product            = var.product
   name               = "${var.product}-v11"
@@ -111,6 +127,8 @@ module "recipe-database-v11" {
   postgresql_user    = "rhubarbadmin"
   database_name      = "rhubarb-v11"
   postgresql_version = "11"
+
+  subnet_id          = data.azurerm_subnet.postgres.id
   sku_name           = "GP_Gen5_2"
   sku_tier           = "GeneralPurpose"
   storage_mb         = "51200"
