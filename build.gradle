@@ -107,7 +107,7 @@ dependencies {
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: springBootVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: springBootVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: springBootVersion
-  compile group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
+  compile group: 'org.postgresql', name: 'postgresql', version: '42.2.19'
   compile group: 'org.flywaydb', name: 'flyway-core', version: '5.2.4'
   compile group: 'uk.gov.hmcts.reform', name: 'properties-volume-spring-boot-starter', version: '0.1.0'
 
