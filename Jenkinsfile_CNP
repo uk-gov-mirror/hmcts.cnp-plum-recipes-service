@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure") _
+@Library("Infrastructure@update_image_tagging") _
 
 def type = "java"
 def product = "plum"
