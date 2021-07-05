@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@DTSPO-2706") _
+@Library("Infrastructure@DTSPO2706") _
 
 def type = "java"
 def product = "plum"
