@@ -11,4 +11,3 @@ java:
     POSTGRES_DATABASE: "{{ .Values.postgresql.postgresqlDatabase }}"
     POSTGRES_USER: "{{ .Values.postgresql.postgresqlUsername }}"
     POSTGRES_HOST: "{{ .Release.Name }}-postgresql"
-    TEST_KEY: TEST_KEY
