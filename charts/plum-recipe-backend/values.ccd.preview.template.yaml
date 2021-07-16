@@ -1,0 +1,4 @@
+java:
+  # Don't modify below here
+  environment:
+    TEST_KEY1: TEST_KEY
