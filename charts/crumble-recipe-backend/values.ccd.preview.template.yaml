@@ -2,4 +2,4 @@ java:
   # Don't modify below here
   environment:
     TEST_KEY: TEST_KEY
-    TEST_KEY4: TEST_KEY4
+    TEST_KEY5: TEST_KEY5
