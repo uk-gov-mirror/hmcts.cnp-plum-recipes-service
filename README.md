@@ -1,6 +1,6 @@
 # Plum Recipes API
 
-## Purpose
+### Purpose
 
 The purpose of this service is to provide an example of how a Spring Boot application can be
 set up in HMCTS, so that it can be processed by the pipeline and get deployed to CNP.
