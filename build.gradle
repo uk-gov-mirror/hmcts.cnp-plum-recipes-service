@@ -52,7 +52,7 @@ repositories {
   jcenter()
   mavenCentral()
   maven {
-    url  "https://dl.bintray.com/hmcts/hmcts-maven"
+    url  "https://jitpack.io"
   }
 }
 
@@ -116,12 +116,12 @@ dependencies {
   compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
   annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-  functionalTestImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion, {
+  testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion, {
     exclude group: 'junit', module: 'junit'
     exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
   }
-  functionalTestImplementation group: 'io.rest-assured', name: 'rest-assured'
-  functionalTestImplementation group: 'com.typesafe', name: 'config', version: '1.4.1'
+  testImplementation group: 'io.rest-assured', name: 'rest-assured'
+  testImplementation group: 'com.typesafe', name: 'config', version: '1.4.1'
 }
 
 mainClassName = 'uk.gov.hmcts.reform.rhubarb.recipes.Application'
