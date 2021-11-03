@@ -99,29 +99,29 @@ configurations.all {
 }
 
 dependencies {
-  compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
-  compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: springBootVersion
-  compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: springBootVersion
-  compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: springBootVersion
-  compile group: 'org.postgresql', name: 'postgresql', version: '42.3.1'
-  compile group: 'org.flywaydb', name: 'flyway-core', version: '8.0.3'
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: springBootVersion
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: springBootVersion
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: springBootVersion
+  implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.1'
+  implementation group: 'org.flywaydb', name: 'flyway-core', version: '8.0.3'
 
-  compile group: 'com.google.guava', name: 'guava', version: '31.0.1-jre'
+  implementation group: 'com.google.guava', name: 'guava', version: '31.0.1-jre'
 
-  compile group: 'uk.gov.hmcts.reform', name: 'logging', version: javaLoggingVersion
-  compile group: 'uk.gov.hmcts.reform', name: 'logging-appinsights', version: javaLoggingVersion
-  compile group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
-  compile group: 'io.springfox', name: 'springfox-swagger-ui', version: springfoxSwagger
+  implementation group: 'uk.gov.hmcts.reform', name: 'logging', version: javaLoggingVersion
+  implementation group: 'uk.gov.hmcts.reform', name: 'logging-appinsights', version: javaLoggingVersion
+  implementation group: 'io.springfox', name: 'springfox-swagger2', version: springfoxSwagger
+  implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: springfoxSwagger
 
   compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
   annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-  testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion, {
+  testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion, {
     exclude group: 'junit', module: 'junit'
     exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
   }
-  testCompile group: 'io.rest-assured', name: 'rest-assured'
-  testCompile group: 'com.typesafe', name: 'config', version: '1.4.1'
+  testImplementation group: 'io.rest-assured', name: 'rest-assured'
+  testImplementation group: 'com.typesafe', name: 'config', version: '1.4.1'
 }
 
 mainClassName = 'uk.gov.hmcts.reform.rhubarb.recipes.Application'
