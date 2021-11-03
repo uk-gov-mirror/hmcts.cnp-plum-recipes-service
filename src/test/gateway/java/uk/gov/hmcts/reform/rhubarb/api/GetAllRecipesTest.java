@@ -1,7 +1,5 @@
 package uk.gov.hmcts.reform.rhubarb.api;
 
-import com.typesafe.config;
-
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import io.restassured.RestAssured;
