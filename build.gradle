@@ -116,12 +116,12 @@ dependencies {
   compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
   annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
-  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion, {
+  functionalTestImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion, {
     exclude group: 'junit', module: 'junit'
     exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
   }
-  implementation group: 'io.rest-assured', name: 'rest-assured'
-  implementation group: 'com.typesafe', name: 'config', version: '1.4.1'
+  functionalTestImplementation group: 'io.rest-assured', name: 'rest-assured'
+  functionalTestImplementation group: 'com.typesafe', name: 'config', version: '1.4.1'
 }
 
 mainClassName = 'uk.gov.hmcts.reform.rhubarb.recipes.Application'
