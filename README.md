@@ -65,7 +65,7 @@ The API (and its corresponding product) is defined in an Azure Resource Manager 
 
 In order to call the API, you need to use a private key and a certificate. Here's how to generate them:
 
-Make sure you have openssl installed, e.g.:
+Make sure you have openssl installed, e.g. :
 
 ```
 brew install openssl
@@ -98,12 +98,12 @@ It should look similar to this:
 ```
   locals {
     ...
-    
+
     allowed_certificate_thumbprints = [
       "${var.api_gateway_test_certificate_thumbprint}",
       "8D81D05C0154423AE548D709CDDF9549E826C036" # thumbprint of your new certificate
     ]
-    
+
     ...
   }
 ```
