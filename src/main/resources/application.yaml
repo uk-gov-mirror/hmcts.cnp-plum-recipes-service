@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: HMCTS Rhubarb Recipes Service
+    name: HMCTS Plum Recipes Service
   config:
     import: "optional:configtree:/mnt/secrets/plumsi/,optional:configtree:/mnt/secrets/crumblesi/,optional:configtree:/mnt/secrets/toffee/"
   datasource:
