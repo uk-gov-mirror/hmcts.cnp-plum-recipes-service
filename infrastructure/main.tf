@@ -21,6 +21,12 @@ locals {
   vault_name                = "${var.product}si-${var.env}"
 }
 
+resource "null_resource" "test" {
+    triggers = {
+    force_run = "${timestamp()}"
+  }
+}
+
 data "azurerm_subnet" "postgres" {
   name                 = "core-infra-subnet-0-${var.env}"
   resource_group_name  = "core-infra-${var.env}"
