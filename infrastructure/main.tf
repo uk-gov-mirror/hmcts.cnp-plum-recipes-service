@@ -21,12 +21,6 @@ locals {
   vault_name                = "${var.product}si-${var.env}"
 }
 
-resource "null_resource" "test" {
-    triggers = {
-    force_run = "${timestamp()}"
-  }
-}
-
 data "azurerm_subnet" "postgres" {
   name                 = "core-infra-subnet-0-${var.env}"
   resource_group_name  = "core-infra-${var.env}"
@@ -36,6 +30,12 @@ data "azurerm_subnet" "postgres" {
 data "azurerm_key_vault" "key_vault" {
   name                = local.vault_name
   resource_group_name = local.shared_infra_rg
+}
+
+resource "azurerm_key_vault_secret" "test" {
+  name         = "test"
+  value        = "test"
+  key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-USER" {
