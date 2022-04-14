@@ -115,7 +115,7 @@ module "recipe-database-v11" {
   location           = var.location
   env                = var.env
   postgresql_user    = "rhubarbadmin"
-  database_name      = "rhubarb-v11"
+  database_name      = "rhubarb"
   postgresql_version = "11"
 
   subnet_id          = data.azurerm_subnet.postgres.id
