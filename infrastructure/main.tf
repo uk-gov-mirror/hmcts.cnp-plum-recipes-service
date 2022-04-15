@@ -32,36 +32,6 @@ data "azurerm_key_vault" "key_vault" {
   resource_group_name = local.shared_infra_rg
 }
 
-resource "azurerm_key_vault_secret" "POSTGRES-USER" {
-  name         = "recipe-backend-POSTGRES-USER"
-  value        = module.recipe-database.user_name
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
-resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
-  name         = "recipe-backend-POSTGRES-PASS"
-  value        = module.recipe-database.postgresql_password
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
-resource "azurerm_key_vault_secret" "POSTGRES_HOST" {
-  name         = "recipe-backend-POSTGRES-HOST"
-  value        = module.recipe-database.host_name
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
-resource "azurerm_key_vault_secret" "POSTGRES_PORT" {
-  name         = "recipe-backend-POSTGRES-PORT"
-  value        = module.recipe-database.postgresql_listen_port
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
-resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
-  name         = "recipe-backend-POSTGRES-DATABASE"
-  value        = module.recipe-database.postgresql_database
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
 resource "azurerm_key_vault_secret" "POSTGRES-USER-V11" {
   name         = "recipe-backend-POSTGRES-USER-v11"
   value        = module.recipe-database-v11.user_name
@@ -90,22 +60,6 @@ resource "azurerm_key_vault_secret" "POSTGRES_DATABASE-V11" {
   name         = "recipe-backend-POSTGRES-DATABASE-v11"
   value        = module.recipe-database-v11.postgresql_database
   key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
-module "recipe-database" {
-  source             = "git@github.com:hmcts/cnp-module-postgres?ref=master"
-  product            = var.product
-  name               = var.product
-  location           = var.location
-  env                = var.env
-  postgresql_user    = "rhubarbadmin"
-  database_name      = "rhubarb"
-  postgresql_version = "10"
-  sku_name           = "GP_Gen5_2"
-  sku_tier           = "GeneralPurpose"
-  storage_mb         = "51200"
-  common_tags        = var.common_tags
-  subscription       = var.subscription
 }
 
 module "recipe-database-v11" { 
