@@ -47,7 +47,7 @@ You should get a response similar to this:
   {"status":"UP","diskSpace":{"status":"UP","total":249644974080,"free":137188298752,"threshold":10485760}}
 ```
 
-### API
+##### API
 
 The Plum Recipes service has an API (in Azure API Management Service) set up in Terraform. The API serves as
 a proxy that lets authenticated requests reach specific endpoints of the service (in this case, the "Find all
