@@ -5,7 +5,7 @@
 The purpose of this service is to provide an example of how a Spring Boot application can be
 set up in HMCTS, so that it can be processed by the pipeline and get deployed to CNP.
 
-## What's inside
+### What's inside
 
 The project contains a Spring Boot app that exposes two endpoints ([/src](/src)) and infrastructure
 definition ([/infrastructure](/infrastructure)).
