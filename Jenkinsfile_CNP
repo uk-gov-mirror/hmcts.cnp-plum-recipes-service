@@ -31,9 +31,4 @@ withPipeline(type, product, component) {
   onNonPR() {
     loadVaultSecrets(apiTestSecrets)
   }
-  // before('buildinfra:prod') {
-  //   currentBuild.description = "Success!"
-  //   error 'Plun wont be built on prod environment yet.'
-  // }
-  //test
 }
