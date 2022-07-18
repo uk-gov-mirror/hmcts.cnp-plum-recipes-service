@@ -76,4 +76,12 @@
    <packageUrl regex="true">^pkg:maven/org\.apache\.logging\.log4j/log4j\-api@.*$</packageUrl>
    <cve>CVE-2022-33915</cve>
   </suppress>
+
+   <!-- Known FP, see https://github.com/jeremylong/DependencyCheck/issues/4671 -->
+  <suppress>
+    <notes><![CDATA[Ignored since it is a known false-positive]]></notes>
+    <packageUrl regex="true">^pkg:maven/jakarta.*$</packageUrl>
+    <cve>CVE-2022-31569</cve>
+  </suppress>
+
 </suppressions>
