@@ -11,5 +11,19 @@ java:
     POSTGRES_DATABASE: "{{ .Values.postgresql.auth.database }}"
     POSTGRES_USER: "{{ .Values.postgresql.auth.username }}"
     POSTGRES_HOST: "{{ .Release.Name }}-postgresql"
-persistence:
-  enabled: false
+
+elasticsearch:
+  clusterName: "es"
+  replicas: 1
+  minimumMasterNodes: 1
+  antiAffinity: "soft"
+  esJavaOpts: "-Xmx512m -Xms512m"
+  persistence:
+    enabled: false
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: traefik
+    path: /
+    hosts:
+      - ""
