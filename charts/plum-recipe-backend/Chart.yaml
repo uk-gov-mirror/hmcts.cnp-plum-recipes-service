@@ -11,5 +11,5 @@ dependencies:
     version: 4.0.1-alpha
     repository: 'https://hmctspublic.azurecr.io/helm/v1/repo/'
   - name: elasticsearch
-    version: 7.8.5
+    version: 7.8.6
     repository: 'https://hmctspublic.azurecr.io/helm/v1/repo/'
