@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@change-zone-poc") _
+@Library("Infrastructure") _
 
 def type = "java"
 def product = "plum"
