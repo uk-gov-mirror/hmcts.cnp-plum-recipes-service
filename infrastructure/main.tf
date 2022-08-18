@@ -10,7 +10,7 @@ locals {
   allowed_certificate_thumbprints = [
     # API tests
     var.api_gateway_test_certificate_thumbprint,
-    "29390B7A235C692DACD93FA0AB90081867177BEC"
+    "8B0666A1041156C83BCE832906F9BC7C2542B65A"
   ]
 
   thumbprints_in_quotes     = formatlist("&quot;%s&quot;", local.allowed_certificate_thumbprints)
