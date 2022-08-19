@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure") _
+@Library("Infrastructure@test-with-01-cluster") _
 
 def type = "java"
 def product = "plum"
