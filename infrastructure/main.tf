@@ -62,7 +62,7 @@ resource "azurerm_key_vault_secret" "POSTGRES_DATABASE-V11" {
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
-module "recipe-database-v11" { 
+module "recipe-database-v11" {
   source             = "git@github.com:hmcts/cnp-module-postgres?ref=postgresql_tf"
   product            = var.product
   name               = "${var.product}-v11"
@@ -102,6 +102,7 @@ module "api" {
   path          = local.api_base_path
   service_url   = "http://${var.product}-${local.app}-${var.env}.service.core-compute-${var.env}.internal"
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cnp-plum-recipes-service.json"
+  content_format = "openapi+json-link"
 }
 
 module "policy" {
