@@ -38,7 +38,7 @@
    <packageUrl regex="true">^pkg:maven/org\.springframework\.security/spring\-security\-crypto@.*$</packageUrl>
    <cve>CVE-2018-1258</cve>
   </suppress>
-  
+
   <suppress>
   <notes><![CDATA[
    only affects log appender over SMTP ]]></notes>
@@ -58,7 +58,7 @@
     <notes><![CDATA[Ignored since a fix is not available]]></notes>
     <packageUrl regex="true">^pkg:maven/org\.springframework/spring.*$</packageUrl>
     <cve>CVE-2016-1000027</cve>
-  </suppress>  
+  </suppress>
  <suppress>
     <notes><![CDATA[it's an example webapp that the CVE is against, very bad CVE data]]></notes>
     <packageUrl regex="true">^pkg:maven/org\.apache\.tomcat\.embed/tomcat\-embed\-core@.*$</packageUrl>
@@ -82,6 +82,13 @@
     <notes><![CDATA[Ignored since it is a known false-positive]]></notes>
     <packageUrl regex="true">^pkg:maven/jakarta.*$</packageUrl>
     <cve>CVE-2022-31569</cve>
+  </suppress>
+
+  <!-- remove when spring boot 2.7.4 or greater is upgraded to -->
+  <suppress>
+    <notes><![CDATA[Not relevant to us as all yaml is checked directly into the repo]]></notes>
+    <packageUrl regex="true">^pkg:maven/org\.yaml/snakeyaml@.*$</packageUrl>
+    <cve>CVE-2022-25857</cve>
   </suppress>
 
 </suppressions>
