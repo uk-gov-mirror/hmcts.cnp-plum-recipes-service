@@ -89,6 +89,9 @@
     <notes><![CDATA[Not relevant to us as all yaml is checked directly into the repo]]></notes>
     <packageUrl regex="true">^pkg:maven/org\.yaml/snakeyaml@.*$</packageUrl>
     <cve>CVE-2022-25857</cve>
+    <cve>CVE-2022-38749</cve>
+    <cve>CVE-2022-38750</cve>
+    <cve>CVE-2022-38751</cve>
   </suppress>
 
 </suppressions>
