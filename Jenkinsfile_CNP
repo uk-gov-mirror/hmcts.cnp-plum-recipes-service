@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@collect-nightly-gatling") _
+@Library("Infrastructure") _
 
 def type = "java"
 def product = "plum"
