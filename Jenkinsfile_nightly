@@ -12,5 +12,6 @@ def product = "plum"
 def component = "recipe-backend"
 
 withNightlyPipeline(type, product, component) {
+  enablePerformanceTest()
   enableSlackNotifications('#platops-build-notices')
 }
