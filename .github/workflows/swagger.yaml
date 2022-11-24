@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 11
+          distribution: 'zulu'
       - name: Run Swagger Publisher
         run: ./gradlew test --tests uk.gov.hmcts.reform.rhubarb.recipes.SwaggerPublisher
       - name: Commit to repository
