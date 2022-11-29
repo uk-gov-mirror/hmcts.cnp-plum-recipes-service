@@ -102,6 +102,9 @@ configurations.all {
 }
 
 dependencies {
+
+  compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.0.0'
+
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
@@ -205,5 +208,3 @@ tasks.withType(Test) {
 wrapper {
   distributionType = Wrapper.DistributionType.ALL
 }
-
-runtime("org.springframework.boot:spring-boot-properties-migrator")

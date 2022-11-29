@@ -31,7 +31,6 @@ public class EndpointExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EndpointExceptionHandler.class);
 
-    @Override
     protected ResponseEntity<Object> handleServletRequestBindingException(
         ServletRequestBindingException ex,
         HttpHeaders headers,
@@ -46,7 +45,6 @@ public class EndpointExceptionHandler extends ResponseEntityExceptionHandler {
         );
     }
 
-    @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(
         HttpMessageNotReadableException ex,
         HttpHeaders headers,
@@ -61,7 +59,6 @@ public class EndpointExceptionHandler extends ResponseEntityExceptionHandler {
         );
     }
 
-    @Override
     protected ResponseEntity<Object> handleExceptionInternal(
         Exception ex,
         Object body,
