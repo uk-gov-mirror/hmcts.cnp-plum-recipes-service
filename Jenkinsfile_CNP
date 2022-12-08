@@ -30,6 +30,5 @@ withPipeline(type, product, component) {
   enableApiGatewayTest()
   onNonPR() {
     loadVaultSecrets(apiTestSecrets)
-  enableMasterTestBuild()
   }
 }
