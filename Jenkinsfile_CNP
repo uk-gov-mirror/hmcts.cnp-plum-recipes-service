@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure") _
+@Library("Infrastructure@DTSPO11015") _
 
 def type = "java"
 def product = "plum"
@@ -30,5 +30,6 @@ withPipeline(type, product, component) {
   enableApiGatewayTest()
   onNonPR() {
     loadVaultSecrets(apiTestSecrets)
+  enableMasterTestBuild()
   }
 }

@@ -84,6 +84,16 @@
     <cve>CVE-2022-31569</cve>
   </suppress>
 
+<!-- related to SnakeYaml supress below however not fixed by spring boot upgrade currently -->
+  <suppress until="2023-01-07">
+      <notes><![CDATA[
+      https://github.com/spring-projects/spring-boot/issues/33457 - shows class is generally only used by internal
+      yaml files and not used for data recieved externally
+      ]]>]</notes>
+      <packageUrl regex="true">^pkg:maven/org\.yaml/snakeyaml@.*$</packageUrl>
+      <cve>CVE-2022-1471</cve>
+  </suppress>
+
   <!-- remove when spring boot 2.7.4 or greater is upgraded to -->
   <suppress>
     <notes><![CDATA[Not relevant to us as all yaml is checked directly into the repo]]></notes>
