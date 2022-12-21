@@ -142,7 +142,7 @@ resource "azurerm_application_gateway" "expAfter_testing_appgw" {
 }
 
 resource "azurerm_api_management" "expAfter_testing_apimgmt" {
-  name                = "xptst-apimgmt"
+  name                = "xptst-apimgmt2"
   location            = azurerm_resource_group.expAfter_testing_rg.location
   resource_group_name = azurerm_resource_group.expAfter_testing_rg.name
   publisher_name      = "Boris Johnson"
