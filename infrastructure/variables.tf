@@ -14,10 +14,6 @@ variable "env" {
 variable "subscription" {
 }
 
-variable "ilbIp" {
-  default = ""
-}
-
 variable "tenant_id" {}
 
 variable "jenkins_AAD_objectId" {
@@ -26,10 +22,6 @@ variable "jenkins_AAD_objectId" {
 
 variable "capacity" {
   default = "1"
-}
-
-variable "deployment_namespace" {
-  default = ""
 }
 
 variable "common_tags" {
