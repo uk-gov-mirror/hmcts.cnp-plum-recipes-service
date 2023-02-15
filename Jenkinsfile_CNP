@@ -23,6 +23,8 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
   ]
 }
 
+def expiresAfter = "3000-01-01"
+
 withPipeline(type, product, component) {
   enablePerformanceTest()
   enableAksStagingDeployment()
@@ -31,4 +33,5 @@ withPipeline(type, product, component) {
   onNonPR() {
     loadVaultSecrets(apiTestSecrets)
   }
+  expires(expiresAfter)
 }

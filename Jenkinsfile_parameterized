@@ -28,6 +28,7 @@ properties([
   pipelineTriggers([[$class: 'GitHubPushTrigger']])
 ])
 
+def expiresAfter = "3000-01-01"
 
 env.KEEP_DIR_FOR_DEBUGGING = 'true'
 
@@ -37,4 +38,5 @@ withParameterizedPipeline(params.TYPE, params.PRODUCT_NAME, params.APP, params.E
   onNonPR() {
     //loadVaultSecrets(apiTestSecrets)
   }
+  expires(expiresAfter)
 }
