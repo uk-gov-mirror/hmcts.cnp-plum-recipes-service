@@ -13,7 +13,7 @@
     <cve>CVE-2022-1471</cve>
   </suppress>
 
-  <suppress until="2023-03-09">
+  <suppress until="2023-04-09">
     <cve>CVE-2022-45688</cve>
   </suppress>
 
