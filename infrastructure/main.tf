@@ -69,6 +69,18 @@ resource "azurerm_key_vault_secret" "POSTGRES_DATABASE-V11" {
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
+resource "azurerm_key_vault_secret" "POSTGRES-USER-V14" {
+  name         = "recipe-backend-POSTGRES-USER-v14"
+  value        = module.postgresql_flexible.username
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "POSTGRES-PASS-V14" {
+  name         = "recipe-backend-POSTGRES-PASS-v14"
+  value        = module.postgresql_flexible.password
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
 module "recipe-database-v11" {
   source             = "git@github.com:hmcts/cnp-module-postgres?ref=postgresql_tf"
   product            = var.product
