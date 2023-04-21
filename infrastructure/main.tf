@@ -81,6 +81,24 @@ resource "azurerm_key_vault_secret" "POSTGRES-PASS-V14" {
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
+resource "azurerm_key_vault_secret" "POSTGRES_HOST-V14" {
+  name         = "recipe-backend-POSTGRES-HOST-V14"
+  value        = module.postgresql_flexible.fqdn
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "POSTGRES_PORT-V14" {
+  name         = "recipe-backend-POSTGRES-PORT-V14"
+  value        = "5432"
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "POSTGRES_DATABASE-V14" {
+  name         = "recipe-backend-POSTGRES-DATABASE-V14"
+  value        = "rhubarb"
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
 module "recipe-database-v11" {
   source             = "git@github.com:hmcts/cnp-module-postgres?ref=postgresql_tf"
   product            = var.product
