@@ -39,36 +39,6 @@ data "azurerm_key_vault" "key_vault" {
   resource_group_name = local.shared_infra_rg
 }
 
-resource "azurerm_key_vault_secret" "POSTGRES-USER-V11" {
-  name         = "recipe-backend-POSTGRES-USER-v11"
-  value        = module.recipe-database-v11.user_name
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
-resource "azurerm_key_vault_secret" "POSTGRES-PASS-V11" {
-  name         = "recipe-backend-POSTGRES-PASS-v11"
-  value        = module.recipe-database-v11.postgresql_password
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
-resource "azurerm_key_vault_secret" "POSTGRES_HOST-V11" {
-  name         = "recipe-backend-POSTGRES-HOST-v11"
-  value        = module.recipe-database-v11.host_name
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
-resource "azurerm_key_vault_secret" "POSTGRES_PORT-V11" {
-  name         = "recipe-backend-POSTGRES-PORT-v11"
-  value        = module.recipe-database-v11.postgresql_listen_port
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
-resource "azurerm_key_vault_secret" "POSTGRES_DATABASE-V11" {
-  name         = "recipe-backend-POSTGRES-DATABASE-v11"
-  value        = module.recipe-database-v11.postgresql_database
-  key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
 resource "azurerm_key_vault_secret" "POSTGRES-USER-V14" {
   name         = "recipe-backend-POSTGRES-USER-v14"
   value        = module.postgresql_flexible.username
@@ -97,24 +67,6 @@ resource "azurerm_key_vault_secret" "POSTGRES_DATABASE-V14" {
   name         = "recipe-backend-POSTGRES-DATABASE-V14"
   value        = "rhubarb"
   key_vault_id = data.azurerm_key_vault.key_vault.id
-}
-
-module "recipe-database-v11" {
-  source             = "git@github.com:hmcts/cnp-module-postgres?ref=postgresql_tf"
-  product            = var.product
-  component          = var.component
-  name               = "${var.product}-v11"
-  location           = var.location
-  env                = var.env
-  postgresql_user    = "rhubarbadmin"
-  database_name      = "rhubarb"
-  postgresql_version = "11"
-  subnet_id          = data.azurerm_subnet.postgres.id
-  sku_name           = "GP_Gen5_2"
-  sku_tier           = "GeneralPurpose"
-  storage_mb         = "51200"
-  common_tags        = var.common_tags
-  subscription       = var.subscription
 }
 
 module "postgresql_flexible" {
