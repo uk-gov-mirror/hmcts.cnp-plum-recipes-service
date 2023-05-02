@@ -87,6 +87,9 @@ module "postgresql_flexible" {
   pgsql_databases = [
     {
       name : "plum"
+    },
+    {
+      name : "rhubarb"
     }
   ]
 
