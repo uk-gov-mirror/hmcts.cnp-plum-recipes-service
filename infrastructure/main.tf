@@ -96,6 +96,33 @@ module "postgresql_flexible" {
   pgsql_version = "14"
 }
 
+module "postgresql_flexible_public" {
+    providers = {
+    azurerm.postgres_network = azurerm.postgres_network
+  }
+
+  source        = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=public-flexibleserver"
+  env           = var.env
+  product       = var.product
+  name          = "${var.product}-v14-flexible"
+  component     = var.component
+  business_area = "CFT"
+  location      = var.location
+  public_access = true
+
+  common_tags = var.common_tags
+  admin_user_object_id = var.jenkins_AAD_objectId
+  pgsql_databases = [
+    {
+      name : "plum"
+    },
+    {
+      name : "rhubarb"
+    }
+  ]
+
+  pgsql_version = "14"
+}
 # region API (gateway)
 
 module "plum_product" {
