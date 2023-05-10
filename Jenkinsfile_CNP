@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@purgetagsonpromote")
+@Library("Infrastructure@purgetagsonpromote") 
 
 def type = "java"
 def product = "plum"
