@@ -1,4 +1,4 @@
-# Plum Recipes API
+## Plum Recipes API
 
 ## Purpose
 
