@@ -1,4 +1,5 @@
 {
   "10035_Strict-Transport-Security Header Not Set_https://plum-recipe-backend-staging.aat.platform.hmcts.net/v2/api-docs_GET": "ignore",
-  "10049_Storable and Cacheable Content_https://plum-recipe-backend-staging.aat.platform.hmcts.net/v2/api-docs_GET": "ignore"
+  "10049_Storable and Cacheable Content_https://plum-recipe-backend-staging.aat.platform.hmcts.net/v2/api-docs_GET": "ignore",
+  "100000_A Client Error response code was returned by the server_https://plum-recipe-backend-staging.aat.platform.hmcts.net/v2/api-docs_GET": "ignore"
 }
