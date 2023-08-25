@@ -18,7 +18,7 @@ def product = "plum"
 def component = "recipe-backend"
 
 withNightlyPipeline(type, product, component) {
-  enableFortifyScan()
+  enableFortifyScan('plumsi-aat')
   enablePerformanceTest()
   enableSlackNotifications('#platops-build-notices')
   env.TEST_URL = params.URL_TO_TEST
