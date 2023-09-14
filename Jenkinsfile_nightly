@@ -11,7 +11,7 @@ properties([
         ])
 ])
 
-@Library("Infrastructure@DTSPO-14034/zap-cli-replace-2")
+@Library("Infrastructure@url-exclusions")
 
 def type = "java"
 def product = "plum"
