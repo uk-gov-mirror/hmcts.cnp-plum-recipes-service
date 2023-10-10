@@ -13,7 +13,6 @@
     <cve>CVE-2022-1471</cve>
   </suppress>
 
-<<<<<<< HEAD
   <suppress>
     <notes><![CDATA[
     file name: jackson-core-2.13.5.jar
@@ -31,9 +30,7 @@
   </suppress>
 
   <suppress until="2023-03-09">
-=======
   <suppress until="2023-04-09">
->>>>>>> master
     <cve>CVE-2022-45688</cve>
   </suppress>
 
