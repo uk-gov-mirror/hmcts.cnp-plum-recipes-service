@@ -11,7 +11,7 @@ properties([
         ])
 ])
 
-@Library("Infrastructure@url-exclusions")
+@Library("Infrastructure@DTSPO-15437/gradle-frontend")
 
 def type = "java"
 def product = "plum"
