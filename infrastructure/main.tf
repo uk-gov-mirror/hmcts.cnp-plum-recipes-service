@@ -2,6 +2,13 @@ provider "azurerm" {
   features {}
 }
 
+provider "azurerm" {
+  features {}
+  skip_provider_registration = true
+  alias                      = "postgres_network"
+  subscription_id            = var.aks_subscription_id
+}
+
 locals {
   app        = "recipe-backend"
   create_api = var.env != "preview" && var.env != "spreview"
@@ -32,52 +39,61 @@ data "azurerm_key_vault" "key_vault" {
   resource_group_name = local.shared_infra_rg
 }
 
-resource "azurerm_key_vault_secret" "POSTGRES-USER-V11" {
-  name         = "recipe-backend-POSTGRES-USER-v11"
-  value        = module.recipe-database-v11.user_name
+resource "azurerm_key_vault_secret" "POSTGRES-USER-V14" {
+  name         = "recipe-backend-POSTGRES-USER-v14"
+  value        = module.postgresql_flexible.username
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
-resource "azurerm_key_vault_secret" "POSTGRES-PASS-V11" {
-  name         = "recipe-backend-POSTGRES-PASS-v11"
-  value        = module.recipe-database-v11.postgresql_password
+resource "azurerm_key_vault_secret" "POSTGRES-PASS-V14" {
+  name         = "recipe-backend-POSTGRES-PASS-v14"
+  value        = module.postgresql_flexible.password
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
-resource "azurerm_key_vault_secret" "POSTGRES_HOST-V11" {
-  name         = "recipe-backend-POSTGRES-HOST-v11"
-  value        = module.recipe-database-v11.host_name
+resource "azurerm_key_vault_secret" "POSTGRES_HOST-V14" {
+  name         = "recipe-backend-POSTGRES-HOST-V14"
+  value        = module.postgresql_flexible.fqdn
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
-resource "azurerm_key_vault_secret" "POSTGRES_PORT-V11" {
-  name         = "recipe-backend-POSTGRES-PORT-v11"
-  value        = module.recipe-database-v11.postgresql_listen_port
+resource "azurerm_key_vault_secret" "POSTGRES_PORT-V14" {
+  name         = "recipe-backend-POSTGRES-PORT-V14"
+  value        = "5432"
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
-resource "azurerm_key_vault_secret" "POSTGRES_DATABASE-V11" {
-  name         = "recipe-backend-POSTGRES-DATABASE-v11"
-  value        = module.recipe-database-v11.postgresql_database
+resource "azurerm_key_vault_secret" "POSTGRES_DATABASE-V14" {
+  name         = "recipe-backend-POSTGRES-DATABASE-V14"
+  value        = "rhubarb"
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
-module "recipe-database-v11" {
-  source             = "git@github.com:hmcts/cnp-module-postgres?ref=postgresql_tf"
-  product            = var.product
-  component          = var.component
-  name               = "${var.product}-v11"
-  location           = var.location
-  env                = var.env
-  postgresql_user    = "rhubarbadmin"
-  database_name      = "rhubarb"
-  postgresql_version = "11"
-  subnet_id          = data.azurerm_subnet.postgres.id
-  sku_name           = "GP_Gen5_2"
-  sku_tier           = "GeneralPurpose"
-  storage_mb         = "51200"
-  common_tags        = var.common_tags
-  subscription       = var.subscription
+module "postgresql_flexible" {
+    providers = {
+    azurerm.postgres_network = azurerm.postgres_network
+  }
+
+  source        = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=master"
+  env           = var.env
+  product       = var.product
+  name          = "${var.product}-v14-flexible"
+  component     = var.component
+  business_area = "CFT"
+  location      = var.location
+
+  common_tags = var.common_tags
+  admin_user_object_id = var.jenkins_AAD_objectId
+  pgsql_databases = [
+    {
+      name : "plum"
+    },
+    {
+      name : "rhubarb"
+    }
+  ]
+
+  pgsql_version = "14"
 }
 
 # region API (gateway)
