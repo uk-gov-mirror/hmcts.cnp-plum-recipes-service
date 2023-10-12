@@ -16,10 +16,6 @@ properties([
 def type = "java"
 def product = "plum"
 def component = "recipe-backend"
-def isFrontend = true
-def args = [
-  'isFrontend': 'true'
-]
 
 withNightlyPipeline(type, product, component, isFrontend) {
   enablePerformanceTest()
