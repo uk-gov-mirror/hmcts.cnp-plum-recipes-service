@@ -11,7 +11,7 @@ properties([
         ])
 ])
 
-@Library("Infrastructure@DTSPO-15437/gradle-frontend")
+@Library("Infrastructure@DTSPO-15437/gradle-frontend-2")
 
 def type = "java"
 def product = "plum"
@@ -22,5 +22,5 @@ withNightlyPipeline(type, product, component) {
   enableSlackNotifications('#platops-build-notices')
   env.TEST_URL = params.URL_TO_TEST
   env.SecurityRules = params.SecurityRules
-  enableSecurityScan()
+  useFrontendSecurityTests()
 }
