@@ -16,12 +16,12 @@ properties([
 def type = "java"
 def product = "plum"
 def component = "recipe-backend"
-def isFrontend = true
+def isFrontend = "true"
 def args = [
   'isFrontend': 'true'
 ]
 
-withNightlyPipeline(type, product, component) {
+withNightlyPipeline(type, product, component, isFrontend) {
   enablePerformanceTest()
   enableSlackNotifications('#platops-build-notices')
   env.TEST_URL = params.URL_TO_TEST
