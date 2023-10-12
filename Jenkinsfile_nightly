@@ -18,7 +18,6 @@ def product = "plum"
 def component = "recipe-backend"
 def isFrontend = true
 def args = [
-  'securityScan': 'true',
   'isFrontend': 'true'
 ]
 
