@@ -22,5 +22,7 @@ withNightlyPipeline(type, product, component) {
   enableSlackNotifications('#platops-build-notices')
   env.TEST_URL = params.URL_TO_TEST
   env.SecurityRules = params.SecurityRules
-  enableSecurityScan()
+  enableSecurityScan(                
+      scanType: "frontend"
+  )
 }
