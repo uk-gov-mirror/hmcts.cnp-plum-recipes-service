@@ -5,3 +5,4 @@ java:
   environment:
     POSTGRES_SSL_MODE: require
   serviceAccountName: crumble
+  saEnabled: true
