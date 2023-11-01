@@ -4,6 +4,4 @@ java:
   ingressHost: ${SERVICE_FQDN}
   environment:
     POSTGRES_SSL_MODE: require
-    CLUSTER_NAME: cft-sbox-00-aks
   serviceAccountName: crumble
-  saEnabled: true
