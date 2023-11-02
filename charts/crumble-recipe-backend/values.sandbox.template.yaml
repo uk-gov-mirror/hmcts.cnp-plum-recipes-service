@@ -4,4 +4,6 @@ java:
   ingressHost: ${SERVICE_FQDN}
   environment:
     POSTGRES_SSL_MODE: require
-  serviceAccountName: crumble
+  saOverride:
+    enabled: true
+    serviceAccountName: crumble
