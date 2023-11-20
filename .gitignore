@@ -18,3 +18,9 @@
 
 .DS_store
 out/
+
+### terraform ###
+.terraform
+.terraform.lock.hcl
+
+

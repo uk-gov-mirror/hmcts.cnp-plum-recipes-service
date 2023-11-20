@@ -19,7 +19,7 @@ import java.util.Optional;
 import static io.restassured.config.SSLConfig.sslConfig;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GetAllRecipesTest {
+class GetAllRecipesTest {
 
     private static final String SUBSCRIPTION_KEY_HEADER_NAME = "Ocp-Apim-Subscription-Key";
     private static final String GET_ALL_RECIPES_PATH = "/recipes";
@@ -28,7 +28,7 @@ public class GetAllRecipesTest {
     private static final Config CONFIG = ConfigFactory.load();
 
     @Test
-    public void should_accept_request_with_valid_certificate_and_subscription_key() throws Exception {
+    void should_accept_request_with_valid_certificate_and_subscription_key() throws Exception {
         Response response = callAllRecipesEndpoint(
             Optional.of(getValidClientKeyStore()),
             Optional.of(getValidSubscriptionKey())
@@ -40,7 +40,7 @@ public class GetAllRecipesTest {
     }
 
     @Test
-    public void should_reject_request_with_invalid_subscription_key() throws Exception {
+    void should_reject_request_with_invalid_subscription_key() throws Exception {
         Response response = callAllRecipesEndpoint(
             Optional.of(getValidClientKeyStore()),
             Optional.of("invalid-subscription-key123")
@@ -52,7 +52,7 @@ public class GetAllRecipesTest {
     }
 
     @Test
-    public void should_reject_request_lacking_subscription_key() throws Exception {
+    void should_reject_request_lacking_subscription_key() throws Exception {
         Optional<String> subscriptionKey = Optional.empty();
 
         Response response = callAllRecipesEndpoint(
@@ -66,7 +66,7 @@ public class GetAllRecipesTest {
     }
 
     @Test
-    public void should_reject_request_with_unrecognised_client_certificate() throws Exception {
+    void should_reject_request_with_unrecognised_client_certificate() throws Exception {
         Response response = callAllRecipesEndpoint(
             Optional.of(getUnrecognisedClientKeyStore()),
             Optional.of(getValidSubscriptionKey())
@@ -78,7 +78,7 @@ public class GetAllRecipesTest {
     }
 
     @Test
-    public void should_reject_request_lacking_client_certificate() throws Exception {
+    void should_reject_request_lacking_client_certificate() throws Exception {
         Optional<KeyStoreWithPassword> keyStore = Optional.empty();
 
         Response response = callAllRecipesEndpoint(
@@ -92,7 +92,7 @@ public class GetAllRecipesTest {
     }
 
     @Test
-    public void should_not_expose_http_version() {
+    void should_not_expose_http_version() {
         Response response = RestAssured
             .given()
             .baseUri(getApiGatewayUrl().replace("https://", "http://"))
