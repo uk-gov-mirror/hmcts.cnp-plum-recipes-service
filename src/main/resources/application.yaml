@@ -33,5 +33,7 @@ management:
   endpoints:
     web:
       base-path: "/"
+      exposure:
+        include: health, info, prometheus, db
   security:
     enabled: false
