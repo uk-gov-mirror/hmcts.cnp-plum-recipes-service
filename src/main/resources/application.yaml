@@ -31,7 +31,7 @@ management:
     health:
       show-details: "always"
       group:
-       custom:
+       db:
         include: "db"
   endpoints:
     web:
