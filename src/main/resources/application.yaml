@@ -31,8 +31,8 @@ management:
     health:
       show-details: "always"
       group:
-       db:
-        include: "liveness"
+       liveness:
+        include: "db"
       validate-group-membership: false
   endpoints:
     web:
