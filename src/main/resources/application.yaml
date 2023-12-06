@@ -32,7 +32,7 @@ management:
       show-details: "always"
       group:
        db:
-        include: "db"
+        include: "liveness"
       validate-group-membership: false
   endpoints:
     web:
