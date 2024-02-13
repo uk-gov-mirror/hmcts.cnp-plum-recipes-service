@@ -30,9 +30,6 @@ management:
   endpoint:
     health:
       show-details: "always"
-       group:
-        readiness:
-         include: "db"
   endpoints:
     web:
       base-path: "/"
