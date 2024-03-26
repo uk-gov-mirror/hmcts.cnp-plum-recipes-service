@@ -82,7 +82,6 @@ module "postgresql_flexible" {
   business_area = "CFT"
   location      = var.location
   subnet_suffix = "expanded"
-  create_mode   = "Update"
 
   common_tags = var.common_tags
   admin_user_object_id = var.jenkins_AAD_objectId
@@ -95,7 +94,7 @@ module "postgresql_flexible" {
     }
   ]
 
-  pgsql_version = "16"
+  pgsql_version = "15"
 }
 
 # region API (gateway)
