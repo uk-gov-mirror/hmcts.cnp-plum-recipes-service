@@ -124,7 +124,7 @@ dependencies {
 
   implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: '6.1.4'
   implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.5.4'
-  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.3'
+  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.4'
 
   compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
   annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
