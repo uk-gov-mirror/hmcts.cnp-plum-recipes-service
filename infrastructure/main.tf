@@ -131,3 +131,19 @@ module "policy" {
 }
 # endregion
 
+# REDIS CACHE TESTING
+
+module "plum-redis-storage" {
+  source                        = "git@github.com:hmcts/cnp-module-redis?ref=master"
+  product                       = "${var.product}-${var.component}-session-storage"
+  location                      = var.location
+  env                           = var.env
+  private_endpoint_enabled      = true
+  redis_version                 = "6"
+  business_area                 = "cft"
+  public_network_access_enabled = false
+  common_tags                   = var.common_tags
+  sku_name                      = var.sku_name
+  family                        = var.family
+  capacity                      = var.redis_capacity
+}
