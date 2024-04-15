@@ -135,16 +135,16 @@ module "policy" {
 
 variable "rdb_backup_enabled" {
   type    = bool
-  default = true
+  default = false
 }
 
 variable "sku_name" {
-  default     = "Premium"
+  default     = "Basic"
   description = "The SKU of Redis to use. Possible values are `Basic`, `Standard` and `Premium`."
 }
 
 variable "family" {
-  default     = "P"
+  default     = "C"
   description = "The SKU family/pricing group to use. Valid values are `C` (for Basic/Standard SKU family) and `P` (for Premium). Use P for higher availability, but beware it costs a lot more."
 }
 
