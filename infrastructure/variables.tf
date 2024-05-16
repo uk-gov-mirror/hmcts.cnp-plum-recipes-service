@@ -1,5 +1,5 @@
 variable "product" {
-  default = "plum-snt"
+  default = "plum-snt-noPlan"
 }
 
 variable "component" {}
