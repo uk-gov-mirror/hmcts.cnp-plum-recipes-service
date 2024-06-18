@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure") 
+@Library("Infrastructure@DTSPO-16115-deprecate-properties-volume-spring-boot-starter") 
 
 def type = "java"
 def product = "plum"
