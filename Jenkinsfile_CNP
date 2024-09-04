@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@timja-patch-1") 
+@Library("Infrastructure@revert-1266-timja-patch-1") 
 
 def type = "java"
 def product = "plum"
