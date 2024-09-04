@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure") 
+@Library("Infrastructure@OPS/preview01Test") 
 
 def type = "java"
 def product = "plum"
