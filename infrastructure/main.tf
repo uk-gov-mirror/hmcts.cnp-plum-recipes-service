@@ -74,7 +74,7 @@ module "postgresql_flexible" {
     azurerm.postgres_network = azurerm.postgres_network
   }
 
-  source        = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=log-analytics"
+  source        = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=master"
   env           = var.env
   product       = var.product
   name          = "${var.product}-v14-flexible"
@@ -82,7 +82,6 @@ module "postgresql_flexible" {
   business_area = "CFT"
   location      = var.location
   subnet_suffix = "expanded"
-  enable_qpi    = var.env == "sandbox" ? true : false
 
   common_tags          = var.common_tags
   admin_user_object_id = var.jenkins_AAD_objectId
