@@ -40,6 +40,9 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
   ]
 }
 
+// Stops sbox DBs being removed and blocking our builds
+def expiresAfter = "3000-01-01"
+
 withPipeline(type, product, app) {
   // never skip stages when testing the pipeline
   env.NO_SKIP_IMG_BUILD = 'true'
