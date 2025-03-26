@@ -45,7 +45,7 @@ checkstyle {
 
 configurations.checkstyle {
   resolutionStrategy.capabilitiesResolution.withCapability("com.google.collections:google-collections") {
-    select("com.google.guava:guava:33.4.5-jre")
+    select("com.google.guava:guava:33.4.6-jre")
   }
 }
 
@@ -118,7 +118,7 @@ dependencies {
   implementation group: 'org.flywaydb', name: 'flyway-core', version: '11.4.1'
   implementation group: 'org.flywaydb', name: 'flyway-database-postgresql', version: '11.4.1'
 
-  implementation group: 'com.google.guava', name: 'guava', version: '33.4.5-jre'
+  implementation group: 'com.google.guava', name: 'guava', version: '33.4.6-jre'
 
   implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.6.0'
 
