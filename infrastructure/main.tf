@@ -74,7 +74,7 @@ module "postgresql_flexible" {
     azurerm.postgres_network = azurerm.postgres_network
   }
 
-  source        = var.pgsql_module_version
+  source        = var.env == "sandbox" ? "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=dtspo-25133-configuring-database-groups" : "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=master"
   env           = var.env
   product       = var.product
   name          = "${var.product}-v14-flexible"

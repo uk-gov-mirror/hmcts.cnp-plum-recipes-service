@@ -48,7 +48,3 @@ variable "private_dns_subscription_id" {
 variable "pgsql_sku" {
   default = "GP_Standard_D2s_v3"
 }
-
-variable "pgsql_module_version" {
-  default = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=master"
-}
