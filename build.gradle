@@ -8,6 +8,7 @@ buildscript {
 }
 
 plugins {
+  id 'scala'
   id 'application'
   id 'checkstyle'
   id 'pmd'
