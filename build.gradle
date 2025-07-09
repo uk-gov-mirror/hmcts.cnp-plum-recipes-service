@@ -8,6 +8,7 @@ buildscript {
 }
 
 plugins {
+  id 'scala'
   id 'application'
   id 'checkstyle'
   id 'pmd'
@@ -19,7 +20,7 @@ plugins {
   id 'com.github.ben-manes.versions' version '0.52.0'
   id 'se.patrikerdes.use-latest-versions' version '0.2.18'
   id 'org.sonarqube' version '6.2.0.5505'
-  id 'io.gatling.gradle' version '3.10.5.1'
+  id 'io.gatling.gradle' version '3.13.5'
 }
 
 group = 'uk.gov.hmcts.reform'
@@ -82,7 +83,7 @@ def javaLoggingVersion = '5.1.9'
 repositories {
   mavenLocal()
   mavenCentral()
-  maven { url 'https://jitpack.io' }
+  maven { url = 'https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1' }
 }
 
 dependencyUpdates.resolutionStrategy = {
