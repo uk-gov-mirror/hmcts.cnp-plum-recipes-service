@@ -3,6 +3,11 @@
 properties([
   // H allows predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
   pipelineTriggers([cron('H 8 * * 1-5')])
+  parameters([
+      string(name: 'SecurityRules',
+      defaultValue: 'http://raw.githubusercontent.com/hmcts/security-test-rules/master/conf/security-rules.conf',
+      description: 'Security rules config'),
+  ]),
 ])
 
 @Library("Infrastructure@dtspo-26872")
@@ -12,6 +17,7 @@ def product = "plum"
 def component = "recipe-backend"
 
 withNightlyPipeline(type, product, component) {
+  env.Rules = params.SecurityRules
   enableSecurityScan()
   enablePerformanceTest()
   enableSlackNotifications('#platops-build-notices')
