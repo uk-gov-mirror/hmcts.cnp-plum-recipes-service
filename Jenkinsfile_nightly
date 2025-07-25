@@ -5,13 +5,14 @@ properties([
   pipelineTriggers([cron('H 8 * * 1-5')])
 ])
 
-@Library("Infrastructure")
+@Library("Infrastructure@dtspo-26872")
 
 def type = "java"
 def product = "plum"
 def component = "recipe-backend"
 
 withNightlyPipeline(type, product, component) {
+  enableSecurityScan()
   enablePerformanceTest()
   enableSlackNotifications('#platops-build-notices')
 }
