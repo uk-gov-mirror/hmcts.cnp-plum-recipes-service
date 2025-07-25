@@ -17,7 +17,7 @@ def product = "plum"
 def component = "recipe-backend"
 
 withNightlyPipeline(type, product, component) {
-  env.Rules = params.SecurityRules
+  env.SecurityRules = params.SecurityRules
   enableSecurityScan()
   enablePerformanceTest()
   enableSlackNotifications('#platops-build-notices')
