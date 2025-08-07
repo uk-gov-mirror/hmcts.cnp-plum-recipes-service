@@ -1,6 +1,7 @@
 #!groovy
 
-@Library("Infrastructure") 
+//@Library("Infrastructure")
+@Library('Infrastructure@add-perftest-vars') _
 
 def type = "java"
 def product = "plum"
@@ -33,5 +34,6 @@ withPipeline(type, product, component) {
   onNonPR() {
     loadVaultSecrets(apiTestSecrets)
   }
+  enablePerformanceTestStages()
   expires(expiresAfter)
 }
