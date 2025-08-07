@@ -34,5 +34,6 @@ withPipeline(type, product, component) {
   onNonPR() {
     loadVaultSecrets(apiTestSecrets)
   }
+  enablePerformanceTestStages()
   expires(expiresAfter)
 }
