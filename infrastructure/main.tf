@@ -113,7 +113,7 @@ variable "sku_name" {
 }
 
 variable "family" {
-  default     = "C"
+  default     = "P"
   description = "The SKU family/pricing group to use. Valid values are `C` (for Basic/Standard SKU family) and `P` (for Premium). Use P for higher availability, but beware it costs a lot more."
 }
 
