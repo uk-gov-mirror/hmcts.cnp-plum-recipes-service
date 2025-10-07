@@ -3,5 +3,5 @@ rdb_backup_enabled                      = true
 family                                  = "P"
 sku_name                                = "Premium"
 rdb_backup_max_snapshot_count           = "1"
-redis_availability_zones                = ["1", "2", "3"]
+availability_zones                      = ["1", "2", "3"]
 pgsql_sku                               = "B_Standard_B1ms"
