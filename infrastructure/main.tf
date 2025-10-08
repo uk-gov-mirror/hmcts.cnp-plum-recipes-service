@@ -117,4 +117,5 @@ module "plum-redis-storage" {
   rdb_backup_frequency            = var.redis_backup_frequency
   rdb_backup_max_snapshot_count   = var.rdb_backup_max_snapshot_count
   rdb_storage_account_name_prefix = var.product
+  availability_zones              = var.availability_zones
 }
