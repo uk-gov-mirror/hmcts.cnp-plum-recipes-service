@@ -80,3 +80,9 @@ variable "rdb_backup_max_snapshot_count" {
   type    = string
   default = "1"
 }
+
+variable "availability_zones" {
+  type        = list(string)
+  default     = []
+  description = "Specifies a list of Availability Zones in which this Redis Cache should be located. Changing this forces a new Redis Cache to be created."
+}
