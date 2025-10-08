@@ -3,4 +3,5 @@ rdb_backup_enabled                      = false
 family                                  = "C"
 sku_name                                = "Standard"
 rdb_backup_max_snapshot_count           = "1"
+availability_zones                      = ["1", "2", "3"]
 pgsql_sku                               = "B_Standard_B1ms"
