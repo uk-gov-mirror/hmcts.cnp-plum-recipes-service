@@ -208,6 +208,10 @@ tasks.withType(Test) {
   useJUnitPlatform()
 }
 
+tasks.named('compileGatlingScala') {
+  scalaCompileOptions.additionalParameters = ['-release', '17']
+}
+
 wrapper {
   distributionType = Wrapper.DistributionType.ALL
 }
