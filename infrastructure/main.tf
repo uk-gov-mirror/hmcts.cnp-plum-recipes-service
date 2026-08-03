@@ -80,14 +80,15 @@ module "postgresql_flexible" {
     azurerm.postgres_network = azurerm.postgres_network
   }
 
-  source        = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=DTSPO-30107-additional-postgres-admins"
-  env           = var.env
-  product       = var.product
-  name          = "${var.product}-v14-flexible"
-  component     = var.component
-  business_area = "CFT"
-  location      = var.location
-  subnet_suffix = "expanded"
+  source            = "git@github.com:hmcts/terraform-module-postgresql-flexible?ref=DTSPO-30107-additional-postgres-admins"
+  env               = var.env
+  product           = var.product
+  name              = "${var.product}-v14-flexible"
+  component         = var.component
+  business_area     = "CFT"
+  location          = var.location
+  subnet_suffix     = "expanded"
+  high_availability = var.env == "perftest" || var.env == "test" ? false : null
 
   common_tags          = var.common_tags
   admin_user_object_id = var.jenkins_AAD_objectId
