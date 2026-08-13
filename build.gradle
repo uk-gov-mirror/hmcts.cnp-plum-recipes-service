@@ -116,8 +116,8 @@ dependencies {
   implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.9.0'
 
   implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: '8.0.0'
-  implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.6.1'
-  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.6.1'
+  implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.6.2'
+  implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.6.2'
 
   compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
   annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
