@@ -1,0 +1,55 @@
+#!groovy
+@Library(value="Infrastructure", changelog=false)
+
+List<LinkedHashMap<String, Object>> apiTestSecrets = [
+  secret('test-client-key-store', 'TEST_CLIENT_KEY_STORE'),
+  secret('test-client-key-store-password', 'TEST_CLIENT_KEY_STORE_PASSWORD'),
+  secret('test-client-subscription-key', 'TEST_CLIENT_SUBSCRIPTION_KEY')
+]
+
+static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
+  [ $class: 'AzureKeyVaultSecret',
+    secretType: 'Secret',
+    name: secretName,
+    version: '',
+    envVariable: envVar
+  ]
+}
+
+properties([
+  parameters([
+    string(name: 'PRODUCT_NAME', defaultValue: 'plum', description: ''),
+    string(name: 'APP', defaultValue: 'recipe-backend', description: ''),
+    string(name: 'TYPE', defaultValue: 'java', description: ''),
+    string(name: 'ENVIRONMENT', defaultValue: 'sandbox', description: 'Environment where code should be build and deployed'),
+    choice(name: 'SUBSCRIPTION', choices: 'sandbox\nnonprod\nprod\nhmctsdemo', description: 'Azure subscriptions available to build in')
+  ]),
+  [$class: 'GithubProjectProperty', projectUrlStr: 'github.com/contino/moj-plum-recipes-service'],
+  pipelineTriggers([
+    [$class: 'GitHubPushTrigger'],
+    cron('H * * * *')
+  ])
+])
+
+def expiresAfter = "3000-01-01"
+
+env.KEEP_DIR_FOR_DEBUGGING = 'true'
+
+// Distinguish scheduled vs manual/on-demand runs in the build history
+boolean isTimerTriggered = !currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause').isEmpty()
+if (isTimerTriggered) {
+  currentBuild.displayName = "#${env.BUILD_NUMBER} · Hourly"
+  currentBuild.description = "Scheduled hourly run"
+} else {
+  currentBuild.displayName = "#${env.BUILD_NUMBER} · On-demand"
+  currentBuild.description = "Manually triggered${env.BUILD_USER_ID ? " by ${env.BUILD_USER_ID}" : ''}"
+}
+
+withParameterizedPipeline(params.TYPE, params.PRODUCT_NAME, params.APP, params.ENVIRONMENT, params.SUBSCRIPTION) {
+  //enableApiGatewayTest()
+  disableLegacyDeployment()
+  onNonPR() {
+    //loadVaultSecrets(apiTestSecrets)
+  }
+  expires(expiresAfter)
+}
