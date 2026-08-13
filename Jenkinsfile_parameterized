@@ -38,8 +38,19 @@ env.KEEP_DIR_FOR_DEBUGGING = 'true'
 // Distinguish scheduled vs manual/on-demand runs in the build history
 boolean isTimerTriggered = !currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause').isEmpty()
 if (isTimerTriggered) {
-  currentBuild.displayName = "#${env.BUILD_NUMBER} · Hourly"
-  currentBuild.description = "Scheduled hourly run"
+  // Two cron lines fire this trigger; tell them apart by the minute they ran
+  boolean isQuarterPast = new Date().format('mm') as int == 15
+  boolean isQuarterTo = new Date().format('mm') as int == 45
+  if (isQuarterPast) {
+    currentBuild.displayName = "#${env.BUILD_NUMBER} · Quarter-past"
+    currentBuild.description = "Scheduled quarter-past run"
+  } else if (isQuarterTo) {
+    currentBuild.displayName = "#${env.BUILD_NUMBER} · Quarter-to"
+    currentBuild.description = "Scheduled quarter-to run"
+  } else {
+    currentBuild.displayName = "#${env.BUILD_NUMBER} · Hourly"
+    currentBuild.description = "Scheduled hourly run"
+  }
 } else {
   currentBuild.displayName = "#${env.BUILD_NUMBER} · On-demand"
   currentBuild.description = "Manually triggered${env.BUILD_USER_ID ? " by ${env.BUILD_USER_ID}" : ''}"
