@@ -27,7 +27,7 @@ properties([
   [$class: 'GithubProjectProperty', projectUrlStr: 'github.com/contino/moj-plum-recipes-service'],
   pipelineTriggers([
     [$class: 'GitHubPushTrigger'],
-    cron('40 * * * *')
+    cron('45 * * * *')
   ])
 ])
 
