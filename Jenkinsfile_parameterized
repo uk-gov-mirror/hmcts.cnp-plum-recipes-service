@@ -29,8 +29,8 @@ properties([
   pipelineTriggers([
     [$class: 'GitHubPushTrigger'],
     parameterizedCron('''
-      45 * * * * %RUN_TYPE=quarter-to
-      15 * * * * %RUN_TYPE=quarter-past
+      45 15 * * * %RUN_TYPE=quarter-to
+      15 15 * * * %RUN_TYPE=quarter-past
     '''.stripIndent())
   ])
 ])
