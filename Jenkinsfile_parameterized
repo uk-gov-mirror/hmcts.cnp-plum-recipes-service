@@ -22,12 +22,16 @@ properties([
     string(name: 'APP', defaultValue: 'recipe-backend', description: ''),
     string(name: 'TYPE', defaultValue: 'java', description: ''),
     string(name: 'ENVIRONMENT', defaultValue: 'sandbox', description: 'Environment where code should be build and deployed'),
-    choice(name: 'SUBSCRIPTION', choices: 'sandbox\nnonprod\nprod\nhmctsdemo', description: 'Azure subscriptions available to build in')
+    choice(name: 'SUBSCRIPTION', choices: 'sandbox\nnonprod\nprod\nhmctsdemo', description: 'Azure subscriptions available to build in'),
+    string(name: 'RUN_TYPE', defaultValue: 'on-demand', description: 'Set by the parameterized cron triggers; identifies which schedule fired this build')
   ]),
   [$class: 'GithubProjectProperty', projectUrlStr: 'github.com/contino/moj-plum-recipes-service'],
   pipelineTriggers([
     [$class: 'GitHubPushTrigger'],
-    cron('45 * * * *\n15 * * * *')
+    parameterizedCron('''
+      45 * * * * %RUN_TYPE=quarter-to
+      15 * * * * %RUN_TYPE=quarter-past
+    '''.stripIndent())
   ])
 ])
 
@@ -35,25 +39,19 @@ def expiresAfter = "3000-01-01"
 
 env.KEEP_DIR_FOR_DEBUGGING = 'true'
 
-// Distinguish scheduled vs manual/on-demand runs in the build history
-boolean isTimerTriggered = !currentBuild.getBuildCauses('hudson.triggers.TimerTrigger$TimerTriggerCause').isEmpty()
-if (isTimerTriggered) {
-  // Two cron lines fire this trigger; tell them apart by the minute they ran
-  boolean isQuarterPast = new Date().format('mm') as int == 15
-  boolean isQuarterTo = new Date().format('mm') as int == 45
-  if (isQuarterPast) {
+// RUN_TYPE is a real build parameter (set per cron line by Parameterized Scheduler), usable by Dynamic View Filter columns
+switch (params.RUN_TYPE) {
+  case 'quarter-past':
     currentBuild.displayName = "#${env.BUILD_NUMBER} · Quarter-past"
     currentBuild.description = "Scheduled quarter-past run"
-  } else if (isQuarterTo) {
+    break
+  case 'quarter-to':
     currentBuild.displayName = "#${env.BUILD_NUMBER} · Quarter-to"
     currentBuild.description = "Scheduled quarter-to run"
-  } else {
-    currentBuild.displayName = "#${env.BUILD_NUMBER} · Hourly"
-    currentBuild.description = "Scheduled hourly run"
-  }
-} else {
-  currentBuild.displayName = "#${env.BUILD_NUMBER} · On-demand"
-  currentBuild.description = "Manually triggered${env.BUILD_USER_ID ? " by ${env.BUILD_USER_ID}" : ''}"
+    break
+  default:
+    currentBuild.displayName = "#${env.BUILD_NUMBER} · On-demand"
+    currentBuild.description = "Manually triggered${env.BUILD_USER_ID ? " by ${env.BUILD_USER_ID}" : ''}"
 }
 
 withParameterizedPipeline(params.TYPE, params.PRODUCT_NAME, params.APP, params.ENVIRONMENT, params.SUBSCRIPTION) {
