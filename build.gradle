@@ -51,7 +51,7 @@ configurations.checkstyle {
 }
 
 ext {
-  lombokVersion = '1.18.46'
+  lombokVersion = '1.18.48'
   set('netty.version', '4.2.0.Final')
 }
 
