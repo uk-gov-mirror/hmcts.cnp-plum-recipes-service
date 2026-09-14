@@ -4,6 +4,17 @@
     "github>hmcts/.github//renovate/automerge-all",
     "local>hmcts/.github:renovate-config"
   ],
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "hmctsprod.azurecr.io/helm/java"
+      ],
+      "versioning": "semver"
+    }
+  ],
   "hostRules": [
     {
       "description": "HTTPS scheme + appid/secret (matches documented pattern)",
