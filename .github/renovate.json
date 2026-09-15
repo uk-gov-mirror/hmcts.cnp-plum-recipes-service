@@ -12,7 +12,7 @@
       "matchPackageNames": [
         "hmctsprod.azurecr.io/helm/java"
       ],
-      "versioning": "semver"
+      "versioning": "loose"
     }
   ],
   "hostRules": [
