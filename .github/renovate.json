@@ -6,22 +6,15 @@
   ],
   "packageRules": [
     {
+      "description": "The java Helm chart is not a Java runtime - lift the built-in Java LTS version filter (workarounds:javaLTSVersions matches deps named java)",
       "matchDatasources": [
         "docker"
       ],
       "matchPackageNames": [
         "hmctsprod.azurecr.io/helm/java"
       ],
-      "versioning": "loose"
-    }
-  ],
-  "hostRules": [
-    {
-      "description": "HTTPS scheme + appid/secret (matches documented pattern)",
-      "matchHost": "https://hmctsprod.azurecr.io",
-      "hostType": "docker",
-      "username": "{{ secrets.RENOVATE_ACR_APPID }}",
-      "password": "{{ secrets.RENOVATE_ACR_SECRET }}"
+      "allowedVersions": "/^\\d+\\.\\d+\\.\\d+$/",
+      "versioning": "semver"
     }
   ]
 }
