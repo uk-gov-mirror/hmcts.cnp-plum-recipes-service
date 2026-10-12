@@ -49,6 +49,11 @@ variable "pgsql_sku" {
   default = "GP_Standard_D2s_v3"
 }
 
+variable "pgsql_version" {
+  type    = string
+  default = "16"
+}
+
 # REDIS CACHE TESTING
 
 variable "rdb_backup_enabled" {
@@ -105,4 +110,3 @@ variable "backup_policy_id" {
 #   type        = number
 #   default     = 1
 # }
-
