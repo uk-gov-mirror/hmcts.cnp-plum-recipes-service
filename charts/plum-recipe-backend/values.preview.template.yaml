@@ -2,6 +2,12 @@ java:
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
+  startupProbe:
+    httpGet:
+      path: /health/startup
+      port: 4550
+    failureThreshold: 30   # Allows up to 30 attempts...
+    periodSeconds: 10      # ...spaced 10 seconds apart (300 seconds total max startup time)
   postgresql:
     enabled: true
   disableKeyVaults: true
