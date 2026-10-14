@@ -2,10 +2,18 @@ java:
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
+  autoscaling:
+    enabled: false
   replicas: 2
   devmemoryRequests: 2Gi
   devcpuRequests: 250m
   devmemoryLimits: 2Gi
   devcpuLimits: 1500m
+  startupProbe:
+    httpGet:
+      path: /health/startup
+      port: 4550
+    failureThreshold: 30   # Allows up to 30 attempts...
+    periodSeconds: 10      # ...spaced 10 seconds apart (300 seconds total max startup time)
   environment:
     POSTGRES_SSL_MODE: require
